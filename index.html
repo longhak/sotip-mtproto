@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>SOTIP Drive (MTProto Edition)</title>
+  <title>SOTIP Drive (MTProto VFS Edition)</title>
 
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#132e53">
@@ -48,7 +48,7 @@
     .sidebar { width: var(--sidebar-width); background: var(--bg-sidebar); color: var(--text-sidebar); display: flex; flex-direction: column; padding: 22px 16px; z-index: 1050; flex-shrink: 0; }
     .logo-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
     .logo-icon { width: 42px; height: 42px; background: rgba(255,255,255,0.15); color: var(--accent-gold); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
-    .logo-text h2 { margin: 0; font-size: 1.2rem; font-weight: 700; color: #fff; }
+    .logo-text h2 { margin: 0; font-size: 1.15rem; font-weight: 700; color: #fff; }
     .logo-text p { margin: 0; font-size: 0.72rem; color: rgba(255,255,255,0.75); }
 
     .nav-menu { list-style: none; padding: 0; margin: 0; flex: 1; }
@@ -71,8 +71,12 @@
     .btn-action input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 
     .content-scroll { flex: 1; overflow-y: auto; padding: 0 24px 40px; }
+    .content-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+    .breadcrumb-title { font-size: 1rem; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+    .breadcrumb-title a { color: var(--text-muted); text-decoration: none; cursor: pointer; }
+    .breadcrumb-title a:hover { color: var(--primary); }
     
-    /* រចនាបថកាតបែប Google Drive (បង្ហាញរូបភាពពេញស្អាត) */
+    /* File Cards */
     .file-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 16px; }
     .file-grid.list-view { display: flex; flex-direction: column; gap: 8px; }
     
@@ -80,18 +84,39 @@
     .file-card:hover { border-color: var(--primary); transform: translateY(-2px); }
     
     .card-thumb-box {
-      width: 100%; height: 130px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
-      font-size: 2.8rem; margin-bottom: 10px; position: relative; overflow: hidden; background-color: var(--hover-bg);
+      width: 100%; height: 120px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-size: 2.8rem; margin-bottom: 10px; position: relative; overflow: hidden; background: linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.06) 100%);
     }
     .card-thumb-box img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
     .file-card:hover .card-thumb-box img { transform: scale(1.04); }
-    .ext-badge { position: absolute; bottom: 6px; right: 6px; font-size: 0.6rem; font-weight: 700; padding: 2px 6px; border-radius: 5px; color: #fff; z-index: 2; box-shadow: 0 2px 5px rgba(0,0,0,0.25); }
     
+    .file-type-preview { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; font-weight: bold; }
+    .file-type-preview i { font-size: 2.8rem; margin-bottom: 2px; }
+    .file-type-preview span { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.85; }
+
+    .ext-badge { position: absolute; bottom: 6px; right: 6px; font-size: 0.6rem; font-weight: 700; padding: 2px 6px; border-radius: 5px; color: #fff; z-index: 2; box-shadow: 0 2px 5px rgba(0,0,0,0.25); }
     .card-name { font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word; padding: 0 4px; }
     .card-meta { font-size: 0.72rem; color: var(--text-muted); margin-top: auto; }
+    .card-menu { position: absolute; top: 8px; right: 8px; z-index: 20;}
+
+    /* Dropdown Context Menu */
+    .btn-dots { width: 30px; height: 30px; border-radius: 8px; border: none; background: rgba(0,0,0,0.4); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; backdrop-filter: blur(2px); transition: all 0.2s;}
+    .btn-dots:hover { background: var(--primary); }
+    .custom-menu { display: none; position: absolute; top: 34px; right: 0; width: 190px; background-color: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); padding: 6px; z-index: 1000; text-align: left; }
+    .custom-menu.show { display: block; }
+    .custom-menu-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; font-size: 0.85rem; font-weight: 500; color: var(--text-main); border-radius: 8px; cursor: pointer; user-select: none; }
+    .custom-menu-item:hover { background-color: var(--hover-bg); }
+    .custom-menu-divider { height: 1px; background-color: var(--border); margin: 4px 0; }
 
     .file-grid.list-view .file-card { flex-direction: row; text-align: left; padding: 8px 14px; gap: 12px; align-items: center; }
-    .file-grid.list-view .card-thumb-box { width: 48px; height: 48px; font-size: 1.5rem; margin-bottom: 0; flex-shrink: 0; }
+    .file-grid.list-view .card-thumb-box { width: 44px; height: 44px; font-size: 1.4rem; margin-bottom: 0; flex-shrink: 0; }
+    .file-grid.list-view .card-thumb-box img { width: 44px; height: 44px; }
+    .file-grid.list-view .file-type-preview i { font-size: 1.4rem; margin-bottom: 0; }
+    .file-grid.list-view .file-type-preview span { display: none; }
+    .file-grid.list-view .ext-badge { display: none; }
+    .file-grid.list-view .card-menu { position: static; margin-left: auto; }
+    .file-grid.list-view .btn-dots { background: transparent; color: var(--text-muted); }
+    .file-grid.list-view .btn-dots:hover { background: var(--hover-bg); color: var(--text-main); }
 
     /* Transfer Center */
     .transfer-center { position: fixed; bottom: 20px; right: 20px; width: 350px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 12px 35px rgba(0,0,0,0.3); z-index: 3500; display: none; overflow: hidden; }
@@ -101,17 +126,19 @@
     /* Modals */
     .custom-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(3px); z-index: 2500; display: none; align-items: center; justify-content: center; padding: 16px; }
     .custom-modal-overlay.active { display: flex; }
-    .custom-modal-box { background-color: var(--bg-panel); color: var(--text-main); border: 1px solid var(--border); border-radius: 18px; width: 100%; max-width: 480px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.35); }
+    .custom-modal-box { background-color: var(--bg-panel); color: var(--text-main); border: 1px solid var(--border); border-radius: 18px; width: 100%; max-width: 460px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.35); }
     .custom-modal-box.modal-xl-box { max-width: 960px; }
     .cm-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid var(--border); }
     .cm-body { padding: 20px; }
+    .cm-footer { display: flex; justify-content: flex-end; gap: 10px; padding: 14px 20px; border-top: 1px solid var(--border); }
     .cm-input { width: 100%; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background-color: var(--bg-body); color: var(--text-main); outline: none; }
+    .cm-input:focus { border-color: var(--primary); }
     #previewBody { background-color: #f1f5f9; min-height: 55vh; max-height: 76vh; overflow: auto; display: flex; align-items: center; justify-content: center; flex-direction: column; width: 100%; }
 
     .toast-status { position: fixed; bottom: 20px; left: 20px; background: #0f172a; color: #fff; padding: 12px 20px; border-radius: 12px; display: flex; align-items: center; gap: 10px; z-index: 4000; transform: translateY(120px); opacity: 0; transition: all 0.3s; font-size: 0.86rem; }
     .toast-status.show { transform: translateY(0); opacity: 1; }
   </style>
-  <script type="module" crossorigin src="./assets/index-DkH_Y5yb.js"></script>
+  <script type="module" crossorigin src="./assets/index-CYpjFXbn.js"></script>
 </head>
 <body data-theme="basic">
 
@@ -121,25 +148,25 @@
       <div class="logo-icon"><i class="bi bi-telegram"></i></div>
       <div class="logo-text">
         <h2>SOTIP Drive</h2>
-        <p>MTProto • Saved Messages</p>
+        <p>MTProto • VFS Edition</p>
       </div>
     </div>
 
     <ul class="nav-menu">
-      <li class="nav-item active" onclick="filterByCategory('ALL', this)">
-        <i class="bi bi-collection-fill"></i> ឯកសារទាំងអស់
+      <li class="nav-item active" id="navMyDrive" onclick="switchTab('drive')">
+        <i class="bi bi-house-door-fill"></i> ថតខ្ញុំ (My Drive)
       </li>
-      <li class="nav-item" onclick="filterByCategory('DOCS', this)">
-        <i class="bi bi-file-earmark-pdf-fill text-danger"></i> ឯកសារ & PDF
+      <li class="nav-item" id="navDocs" onclick="switchTab('DOCS')">
+        <i class="bi bi-file-earmark-text-fill text-info"></i> ឯកសារ (Docs)
       </li>
-      <li class="nav-item" onclick="filterByCategory('MEDIA', this)">
-        <i class="bi bi-play-btn-fill text-info"></i> រូបភាព & វីដេអូ
+      <li class="nav-item" id="navMedia" onclick="switchTab('MEDIA')">
+        <i class="bi bi-play-btn-fill text-danger"></i> រូបភាព & វីដេអូ
       </li>
-      <li class="nav-item" onclick="filterByCategory('ZIP', this)">
-        <i class="bi bi-file-earmark-zip-fill text-warning"></i> បណ្ណសារ (.ZIP)
+      <li class="nav-item" id="navTrash" onclick="switchTab('trash')">
+        <i class="bi bi-trash3-fill text-warning"></i> ធុងសម្រាម (Trash)
       </li>
-      <li class="nav-item" onclick="syncSavedMessages()">
-        <i class="bi bi-arrow-repeat text-success"></i> Sync ពី Saved Messages
+      <li class="nav-item mt-3" onclick="syncSavedMessages()">
+        <i class="bi bi-arrow-repeat text-success"></i> Sync ទិន្នន័យ
       </li>
       <!-- ប៊ូតុងនេះនឹងលាក់ដោយស្វ័យប្រវត្តិក្រោយពេល Login ជោគជ័យ -->
       <li class="nav-item" id="navLoginBtn" onclick="openModal('authModal')">
@@ -159,7 +186,7 @@
       <div class="progress mb-2" style="height:6px; background:rgba(255,255,255,0.2);">
         <div class="progress-bar bg-warning" style="width:100%;"></div>
       </div>
-      <p class="m-0" style="font-size:0.7rem; opacity:0.8;">Saved Messages Cloud Storage</p>
+      <p class="m-0" style="font-size:0.7rem; opacity:0.8;">VFS over Saved Messages</p>
     </div>
   </aside>
 
@@ -168,7 +195,7 @@
     <header class="topbar">
       <div class="search-bar">
         <i class="bi bi-search text-muted"></i>
-        <input type="text" id="searchInput" placeholder="ស្វែងរកឯកសារក្នុង Saved Messages..." oninput="applySearchFilter()">
+        <input type="text" id="searchInput" placeholder="ស្វែងរកឯកសារ ឬ Folder..." oninput="renderGrid()">
       </div>
       <div class="d-flex gap-2">
         <button type="button" class="view-btn" onclick="cycleTheme()" title="ប្ដូរពណ៌ Theme"><i class="bi bi-palette-fill text-warning"></i></button>
@@ -177,18 +204,21 @@
       </div>
     </header>
 
-    <div class="action-bar">
+    <div class="action-bar" id="actionBar">
+      <button type="button" class="btn-action" onclick="openCreateFolderModal()">
+        <i class="bi bi-folder-plus text-warning"></i> Folder ថ្មី
+      </button>
       <div class="btn-action">
-        <i class="bi bi-cloud-arrow-up-fill text-primary"></i> Upload ចូល Saved Messages (ដល់ 2GB)
+        <i class="bi bi-cloud-arrow-up-fill text-primary"></i> Upload ឯកសារ
         <input type="file" id="fileUploadInput" multiple onchange="uploadFilesMTProto(this.files)">
       </div>
-      <button type="button" class="btn-action" onclick="syncSavedMessages()">
-        <i class="bi bi-arrow-repeat text-success"></i> ទាញទិន្នន័យថ្មី (Sync)
-      </button>
-      <span class="ms-auto small text-muted" id="itemCountLabel">0 ឯកសារ</span>
+      <span class="ms-auto small text-muted" id="itemCountLabel">0 ធាតុ</span>
     </div>
 
     <div class="content-scroll">
+      <div class="content-header" id="breadcrumbHeader">
+        <div class="breadcrumb-title" id="breadcrumb"><span>🏠 ថតខ្ញុំ</span></div>
+      </div>
       <div class="file-grid" id="fileGrid"></div>
     </div>
   </main>
@@ -217,38 +247,36 @@
     <span id="toastMsg">កំពុងដំណើរការ...</span>
   </div>
 
-  <!-- Modal 1: MTProto Auth Wizard (នឹងត្រូវបិទ និងលាក់ចោលទាំងស្រុងក្រោយពេល Login រួច) -->
+  <!-- Modals -->
+  <!-- Auth Modal -->
   <div class="custom-modal-overlay" id="authModal">
     <div class="custom-modal-box">
       <div class="cm-header">
         <h6 class="m-0 fw-bold"><i class="bi bi-telegram text-primary me-2"></i>ភ្ជាប់គណនី Telegram (MTProto API)</h6>
-        <button type="button" class="btn-close" onclick="closeModal('authModal')"></button>
       </div>
       <div class="cm-body">
         <div class="alert alert-info py-2 small mb-3">
-          យក <b>api_id</b> និង <b>api_hash</b> ពីវេបសាយផ្លូវការ <a href="https://my.telegram.org" target="_blank" class="fw-bold">my.telegram.org</a> (API development tools)។
+          យក <b>api_id</b> និង <b>api_hash</b> ពីវេបសាយផ្លូវការ <a href="https://my.telegram.org" target="_blank" class="fw-bold">my.telegram.org</a>។
         </div>
         <div class="mb-2">
           <label class="small fw-bold mb-1">1. App api_id (ជាលេខ)</label>
-          <input type="number" class="cm-input" id="inpApiId" placeholder="ឧ. 12345678">
+          <input type="number" class="cm-input" id="inpApiId">
         </div>
         <div class="mb-2">
           <label class="small fw-bold mb-1">2. App api_hash</label>
-          <input type="text" class="cm-input" id="inpApiHash" placeholder="ឧ. a1b2c3d4e5f6...">
+          <input type="text" class="cm-input" id="inpApiHash">
         </div>
         <div class="mb-3">
           <label class="small fw-bold mb-1">3. លេខទូរស័ព្ទ Telegram (មាន +855)</label>
-          <input type="text" class="cm-input" id="inpPhone" placeholder="ឧ. +85512345678">
+          <input type="text" class="cm-input" id="inpPhone">
         </div>
-
         <div id="otpStepBox" style="display:none;" class="p-3 rounded border bg-light text-dark mb-3">
           <label class="small fw-bold text-primary mb-1" id="otpPromptLabel">📩 សូមបញ្ចូលលេខកូដ OTP៖</label>
           <div class="d-flex gap-2">
-            <input type="text" class="form-control" id="inpDynamicCode" placeholder="បញ្ចូលកូដទីនេះ...">
+            <input type="text" class="form-control" id="inpDynamicCode">
             <button type="button" class="btn btn-success fw-bold px-3" id="btnSubmitCode">បញ្ជាក់</button>
           </div>
         </div>
-
         <div class="d-flex justify-content-end">
           <button type="button" class="btn btn-primary fw-bold px-4" onclick="startMTProtoLogin()">ភ្ជាប់ និង Login</button>
         </div>
@@ -256,14 +284,14 @@
     </div>
   </div>
 
-  <!-- Modal 2: Preview Modal -->
+  <!-- Preview Modal -->
   <div class="custom-modal-overlay" id="previewModal">
     <div class="custom-modal-box modal-xl-box">
       <div class="cm-header">
         <h6 class="m-0 fw-bold text-truncate me-2" id="previewTitle">មើលជាមុន</h6>
         <div class="d-flex gap-2 align-items-center">
           <button type="button" class="btn btn-primary btn-sm px-3 fw-bold" id="btnDirectDlPreview">
-            <i class="bi bi-download me-1"></i> ទាញយកឯកសារដើម
+            <i class="bi bi-download me-1"></i> ទាញយក
           </button>
           <button type="button" class="btn-close" onclick="closeModal('previewModal')"></button>
         </div>
@@ -272,6 +300,80 @@
     </div>
   </div>
 
-  <!-- ================= ម៉ាស៊ីន MTProto (GramJS) ================= -->
+  <!-- Folder Modal -->
+  <div class="custom-modal-overlay" id="folderModal">
+    <div class="custom-modal-box">
+      <div class="cm-header">
+        <h6 class="m-0 fw-bold"><i class="bi bi-folder-plus text-warning me-2"></i>បង្កើត Folder ថ្មី</h6>
+        <button type="button" class="btn-close" onclick="closeModal('folderModal')"></button>
+      </div>
+      <div class="cm-body">
+        <input type="text" class="cm-input" id="inpFolderName" placeholder="បញ្ចូលឈ្មោះ Folder...">
+      </div>
+      <div class="cm-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeModal('folderModal')">បោះបង់</button>
+        <button type="button" class="btn btn-primary px-4" onclick="submitCreateFolder()">បង្កើត</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rename Modal -->
+  <div class="custom-modal-overlay" id="renameModal">
+    <div class="custom-modal-box">
+      <div class="cm-header">
+        <h6 class="m-0 fw-bold"><i class="bi bi-pencil-square text-warning me-2"></i>ប្ដូរឈ្មោះ</h6>
+        <button type="button" class="btn-close" onclick="closeModal('renameModal')"></button>
+      </div>
+      <div class="cm-body">
+        <input type="hidden" id="renameId">
+        <input type="hidden" id="renameType">
+        <input type="text" class="cm-input" id="inpRename" placeholder="ឈ្មោះថ្មី...">
+      </div>
+      <div class="cm-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeModal('renameModal')">បោះបង់</button>
+        <button type="button" class="btn btn-warning px-4 fw-bold" onclick="submitRename()">រក្សាទុក</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Move Modal -->
+  <div class="custom-modal-overlay" id="moveModal">
+    <div class="custom-modal-box">
+      <div class="cm-header">
+        <h6 class="m-0 fw-bold"><i class="bi bi-arrows-move text-info me-2"></i>ផ្លាស់ទីទៅកាន់...</h6>
+        <button type="button" class="btn-close" onclick="closeModal('moveModal')"></button>
+      </div>
+      <div class="cm-body">
+        <input type="hidden" id="moveId">
+        <input type="hidden" id="moveType">
+        <select class="cm-input" id="selMoveTarget"></select>
+      </div>
+      <div class="cm-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeModal('moveModal')">បោះបង់</button>
+        <button type="button" class="btn btn-info text-white px-4 fw-bold" onclick="submitMove()">ផ្លាស់ទី</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirm Modal -->
+  <div class="custom-modal-overlay" id="deleteModal">
+    <div class="custom-modal-box">
+      <div class="cm-header">
+        <h6 class="m-0 fw-bold text-danger"><i class="bi bi-exclamation-triangle-fill me-2"></i>បញ្ជាក់ការលុប</h6>
+        <button type="button" class="btn-close" onclick="closeModal('deleteModal')"></button>
+      </div>
+      <div class="cm-body">
+        <input type="hidden" id="delId">
+        <input type="hidden" id="delType">
+        <p class="mb-0" id="delMsg">តើអ្នកចង់លុបមែនទេ?</p>
+      </div>
+      <div class="cm-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeModal('deleteModal')">បោះបង់</button>
+        <button type="button" class="btn btn-danger px-4 fw-bold" id="btnConfirmDelete">លុបចោល</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= ម៉ាស៊ីន MTProto និង VFS ================= -->
 </body>
 </html>
