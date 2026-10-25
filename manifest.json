@@ -1,0 +1,17 @@
+{
+  "name": "SOTIP Drive MTProto",
+  "short_name": "SOTIP Drive",
+  "description": "ឃ្លាំងផ្ទុកឯកសារផ្ទាល់ខ្លួនជាមួយ Telegram Saved Messages",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#132e53",
+  "theme_color": "#132e53",
+  "icons": [
+    {
+      "src": "./sotip-drive.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
