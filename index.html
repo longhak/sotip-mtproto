@@ -33,7 +33,7 @@
       --border: #e2e8f0;
       --hover-bg: #f1f5f9;
       --card-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      --user-font-size: 0.92rem;
+      --user-font-size: 15px;
       --user-line-height: 1.85;
     }
     body[data-theme="modern"] {
@@ -78,14 +78,36 @@
       font-family: 'Times New Roman', 'Khmer OS Siemreap', 'Battambang', 'Kantumruy Pro', sans-serif !important;
       line-height: var(--user-line-height);
     }
-    body { height: 100vh; height: 100dvh; display: flex; overflow: hidden; }
+    body { height: 100vh; height: 100dvh; display: flex; overflow: hidden; width: 100vw; }
+
+    /* ផ្ទាំងខ្មៅស្រអាប់ពេលបើក Sidebar លើទូរស័ព្ទ */
+    .sidebar-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(2px);
+      z-index: 2000;
+    }
+    .sidebar-backdrop.show { display: block; }
 
     /* Sidebar */
-    .sidebar { width: var(--sidebar-width); background: var(--bg-sidebar); color: var(--text-sidebar); display: flex; flex-direction: column; padding: 20px 16px; z-index: 1050; flex-shrink: 0; }
+    .sidebar {
+      width: var(--sidebar-width);
+      background: var(--bg-sidebar);
+      color: var(--text-sidebar);
+      display: flex;
+      flex-direction: column;
+      padding: 20px 16px;
+      z-index: 2100;
+      flex-shrink: 0;
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
     .logo-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-    .logo-icon { width: 42px; height: 42px; background: rgba(255,255,255,0.15); color: var(--accent-gold); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
-    .logo-text h2 { margin: 0; font-size: 1.25rem; font-weight: 700; color: #fff; line-height: 1.3; }
-    .logo-text p { margin: 0; font-size: 0.75rem; color: rgba(255,255,255,0.75); line-height: 1.3; }
+    .logo-icon { width: 42px; height: 42px; background: rgba(255,255,255,0.15); color: var(--accent-gold); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+    .logo-text h2 { margin: 0; font-size: 1.22rem; font-weight: 700; color: #fff; line-height: 1.3; }
+    .logo-text p { margin: 0; font-size: 0.74rem; color: rgba(255,255,255,0.75); line-height: 1.3; }
+    .btn-close-sidebar { display: none; margin-left: auto; background: rgba(255,255,255,0.12); border: none; color: #fff; width: 34px; height: 34px; border-radius: 8px; align-items: center; justify-content: center; font-size: 1.1rem; }
 
     .nav-menu { list-style: none; padding: 0; margin: 0; flex: 1; overflow-y: auto; }
     .nav-item { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 12px; color: rgba(255,255,255,0.85); font-weight: 500; margin-bottom: 5px; cursor: pointer; transition: all 0.2s; font-size: 0.92rem; line-height: 1.7; }
@@ -96,69 +118,72 @@
     .storage-area { background-color: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.15); border-radius: 14px; padding: 14px; margin-top: auto; color: #fff; }
 
     /* Main Content */
-    .main-content { flex: 1; display: flex; flex-direction: column; overflow-x: hidden; width: 100%; }
-    .topbar { height: 68px; background: var(--bg-topbar); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; gap: 12px; position: relative; z-index: 200; }
-    .search-bar { display: flex; align-items: center; background-color: rgba(150,150,150,0.12); border: 1px solid var(--border); border-radius: 12px; padding: 6px 14px; flex: 1; max-width: 460px; }
-    .search-bar input { border: none; outline: none; background: transparent; width: 100%; color: var(--text-topbar); margin-left: 10px; font-size: 0.95rem; }
+    .main-content { flex: 1; display: flex; flex-direction: column; overflow-x: hidden; min-width: 0; width: 100%; }
+    .topbar { height: 66px; background: var(--bg-topbar); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; gap: 10px; position: relative; z-index: 200; flex-shrink: 0; }
+    
+    .btn-mobile-menu { display: none; width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-panel); color: var(--text-main); align-items: center; justify-content: center; font-size: 1.35rem; flex-shrink: 0; cursor: pointer; }
 
-    .view-btn { min-width: 38px; height: 38px; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid var(--border); background-color: var(--bg-panel); border-radius: 10px; color: var(--text-main); cursor: pointer; font-size: 0.88rem; font-weight: 600; transition: all 0.2s; }
+    .search-bar { display: flex; align-items: center; background-color: rgba(150,150,150,0.12); border: 1px solid var(--border); border-radius: 12px; padding: 6px 12px; flex: 1; max-width: 460px; min-width: 0; }
+    .search-bar input { border: none; outline: none; background: transparent; width: 100%; color: var(--text-topbar); margin-left: 8px; font-size: 0.92rem; min-width: 0; }
+
+    .view-btn { min-width: 38px; height: 38px; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid var(--border); background-color: var(--bg-panel); border-radius: 10px; color: var(--text-main); cursor: pointer; font-size: 0.86rem; font-weight: 600; transition: all 0.2s; flex-shrink: 0; }
     .view-btn:hover { border-color: var(--primary); }
     .view-btn.active { background-color: var(--primary); color: #fff; border-color: var(--primary); }
 
     /* Font & Line Spacing Popover */
-    .typo-popover { display: none; position: absolute; top: 62px; right: 24px; width: 290px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 14px; box-shadow: 0 12px 32px rgba(0,0,0,0.25); padding: 16px; z-index: 3000; }
+    .typo-popover { display: none; position: absolute; top: 62px; right: 16px; width: 280px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 14px; box-shadow: 0 12px 32px rgba(0,0,0,0.28); padding: 16px; z-index: 3000; }
     .typo-popover.show { display: block; }
 
-    .action-bar { padding: 14px 24px 10px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-    .btn-action { position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 10px; font-weight: 600; font-size: 0.88rem; cursor: pointer; background-color: var(--bg-panel); border: 1px solid var(--border); color: var(--text-main); box-shadow: var(--card-shadow); line-height: 1.6; }
+    .action-bar { padding: 12px 20px 8px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .btn-action { position: relative; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 14px; border-radius: 10px; font-weight: 600; font-size: 0.86rem; cursor: pointer; background-color: var(--bg-panel); border: 1px solid var(--border); color: var(--text-main); box-shadow: var(--card-shadow); line-height: 1.6; white-space: nowrap; }
     .btn-action:hover { border-color: var(--primary); }
     .btn-action input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 
     /* Breadcrumb Navigation */
-    .breadcrumb-bar { padding: 0 24px 12px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 0.92rem; }
-    .bc-item { cursor: pointer; color: var(--text-muted); font-weight: 600; padding: 3px 8px; border-radius: 8px; transition: all 0.15s; }
+    .breadcrumb-bar { padding: 0 20px 10px; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; font-size: 0.9rem; }
+    .bc-item { cursor: pointer; color: var(--text-muted); font-weight: 600; padding: 2px 8px; border-radius: 8px; transition: all 0.15s; }
     .bc-item:hover { background: var(--hover-bg); color: var(--primary); }
     .bc-item.active { color: var(--text-main); cursor: default; }
 
-    .content-scroll { flex: 1; overflow-y: auto; padding: 0 24px 60px; }
+    .content-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 0 20px 70px; }
     
     /* -------------------------------------------------------------
-       រចនាបថកាតឯកសារ & Folder (ការពារកុំឱ្យដាច់អក្សរខ្មែរ និងមិនបាំង 3-dots)
+       រចនាបថកាតឯកសារ & Folder
        ------------------------------------------------------------- */
-    .file-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px, 1fr)); gap: 18px; }
+    .file-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 16px; }
     .file-grid.list-view { display: flex; flex-direction: column; gap: 10px; }
     
     .file-card { 
       background-color: var(--bg-panel); border: 1px solid var(--border); border-radius: 16px; 
-      padding: 12px; text-align: center; position: relative; transition: all 0.2s; 
+      padding: 10px; text-align: center; position: relative; transition: all 0.2s; 
       box-shadow: var(--card-shadow); display: flex; flex-direction: column; 
-      overflow: visible !important; z-index: 1; 
+      overflow: visible !important; z-index: 1; min-width: 0;
     }
     .file-card:hover { border-color: var(--primary); transform: translateY(-2px); z-index: 10; }
     .file-card.has-menu-open { z-index: 9999 !important; border-color: var(--primary); }
     
     /* 3-dots Menu */
-    .card-menu { position: absolute; top: 10px; right: 10px; z-index: 50; }
+    .card-menu { position: absolute; top: 8px; right: 8px; z-index: 50; }
     .btn-dots { width: 32px; height: 32px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.08); background: rgba(255,255,255,0.92); color: #334155; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.05rem; box-shadow: 0 2px 6px rgba(0,0,0,0.12); transition: all 0.2s; }
-    .btn-dots:hover { background: #fff; color: var(--primary); transform: scale(1.05); }
+    .btn-dots:hover { background: #fff; color: var(--primary); }
     
     .custom-menu { 
       display: none; position: absolute; top: 100%; right: 0; margin-top: 6px; 
-      width: 205px; background-color: var(--bg-panel); border: 1px solid var(--border); 
+      width: 195px; background-color: var(--bg-panel); border: 1px solid var(--border); 
       border-radius: 12px; box-shadow: 0 12px 32px rgba(0,0,0,0.3); padding: 6px; 
       z-index: 10000; text-align: left;
     }
     .custom-menu.show { display: block; animation: menuFade 0.18s ease; }
     @keyframes menuFade { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
     
-    .custom-menu-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; font-size: 0.88rem; font-weight: 500; color: var(--text-main); border-radius: 8px; cursor: pointer; user-select: none; line-height: 1.65; }
+    .custom-menu-item { display: flex; align-items: center; gap: 10px; padding: 8px 10px; font-size: 0.85rem; font-weight: 500; color: var(--text-main); border-radius: 8px; cursor: pointer; user-select: none; line-height: 1.65; }
     .custom-menu-item:hover { background-color: var(--hover-bg); }
     .custom-menu-divider { height: 1px; background-color: var(--border); margin: 4px 0; }
 
     /* ប្រអប់រូបក្របមុខ (Thumbnail / Page 1 Cover) */
     .card-thumb-box {
-      width: 100%; height: 140px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
-      margin-bottom: 10px; position: relative; overflow: hidden; border: 1px solid rgba(0,0,0,0.06);
+      width: 100%; height: 135px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 8px; position: relative; overflow: hidden; border: 1px solid rgba(0,0,0,0.06);
       cursor: pointer; background-color: var(--hover-bg);
     }
     .card-thumb-box img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transition: transform 0.3s ease; }
@@ -169,15 +194,15 @@
 
     /* ក្របទំព័រទី ១ សម្រាប់ឯកសារអត្ថបទ (Word / TXT / CSV) */
     .doc-page-cover {
-      width: 86%; height: 90%; background: #ffffff; color: #1e293b; border-radius: 6px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.12); padding: 8px 10px; text-align: left;
-      font-size: 0.56rem; line-height: 1.45; overflow: hidden; white-space: pre-wrap;
+      width: 88%; height: 90%; background: #ffffff; color: #1e293b; border-radius: 6px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.12); padding: 7px 9px; text-align: left;
+      font-size: 0.54rem; line-height: 1.45; overflow: hidden; white-space: pre-wrap;
       word-break: break-word; border-top: 4px solid var(--primary); position: relative;
     }
 
     .ext-badge {
-      position: absolute; bottom: 6px; right: 6px; font-size: 0.65rem; font-weight: 700;
-      padding: 2px 8px; border-radius: 6px; color: #fff; z-index: 2;
+      position: absolute; bottom: 6px; right: 6px; font-size: 0.62rem; font-weight: 700;
+      padding: 2px 7px; border-radius: 6px; color: #fff; z-index: 2;
       box-shadow: 0 2px 5px rgba(0,0,0,0.25); font-family: 'Times New Roman', sans-serif !important;
       line-height: 1.3; letter-spacing: 0.5px;
     }
@@ -188,54 +213,123 @@
       line-height: var(--user-line-height);
       font-weight: 600;
       margin-bottom: 4px;
-      padding: 4px 4px 2px;
+      padding: 4px 2px 2px;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
       word-break: break-word;
       cursor: pointer;
-      min-height: calc(var(--user-font-size) * var(--user-line-height) * 1.2);
     }
-    .card-meta { font-size: 0.78rem; color: var(--text-muted); margin-top: auto; line-height: 1.4; }
+    .card-meta { font-size: 0.74rem; color: var(--text-muted); margin-top: auto; line-height: 1.4; }
 
     /* List View */
-    .file-grid.list-view .file-card { flex-direction: row; text-align: left; padding: 10px 16px; gap: 14px; align-items: center; }
-    .file-grid.list-view .card-thumb-box { width: 52px; height: 52px; margin-bottom: 0; flex-shrink: 0; }
-    .file-grid.list-view .card-name { -webkit-line-clamp: 1; margin-bottom: 2px; min-height: auto; }
-    .file-grid.list-view .card-menu { top: 50%; right: 14px; transform: translateY(-50%); }
+    .file-grid.list-view .file-card { flex-direction: row; text-align: left; padding: 10px 14px; gap: 12px; align-items: center; }
+    .file-grid.list-view .card-thumb-box { width: 50px; height: 50px; margin-bottom: 0; flex-shrink: 0; }
+    .file-grid.list-view .card-name { -webkit-line-clamp: 1; margin-bottom: 2px; padding-right: 28px; }
+    .file-grid.list-view .card-menu { top: 50%; right: 10px; transform: translateY(-50%); }
     .file-grid.list-view .custom-menu { top: 100%; right: 0; transform: none; }
 
     /* Transfer Center */
-    .transfer-center { position: fixed; bottom: 20px; right: 20px; width: 350px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 12px 35px rgba(0,0,0,0.3); z-index: 3500; display: none; overflow: hidden; }
+    .transfer-center { position: fixed; bottom: 20px; right: 20px; width: 340px; max-width: calc(100vw - 24px); background: var(--bg-panel); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 12px 35px rgba(0,0,0,0.3); z-index: 3500; display: none; overflow: hidden; }
     .transfer-center.active { display: block; }
     .tc-header { background: var(--bg-sidebar); color: #fff; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; font-weight: 700; }
 
     /* Modals */
-    .custom-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(3px); z-index: 10500; display: none; align-items: center; justify-content: center; padding: 16px; }
+    .custom-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(3px); z-index: 10500; display: none; align-items: center; justify-content: center; padding: 12px; }
     .custom-modal-overlay.active { display: flex; }
     .custom-modal-box { background-color: var(--bg-panel); color: var(--text-main); border: 1px solid var(--border); border-radius: 18px; width: 100%; max-width: 480px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.35); }
-    .custom-modal-box.modal-xl-box { max-width: 960px; height: 90vh; display: flex; flex-direction: column; }
-    .cm-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid var(--border); }
-    .cm-body { padding: 20px; }
+    .custom-modal-box.modal-xl-box { max-width: 960px; height: 88vh; display: flex; flex-direction: column; }
+    .cm-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid var(--border); }
+    .cm-body { padding: 16px; }
     .cm-input { width: 100%; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background-color: var(--bg-body); color: var(--text-main); outline: none; }
     #previewBody { background-color: #f1f5f9; flex: 1; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-direction: column; width: 100%; position: relative; }
 
-    .toast-status { position: fixed; bottom: 20px; left: 20px; background: #0f172a; color: #fff; padding: 12px 20px; border-radius: 12px; display: flex; align-items: center; gap: 10px; z-index: 12000; transform: translateY(120px); opacity: 0; transition: all 0.3s; font-size: 0.9rem; }
+    .toast-status { position: fixed; bottom: 16px; left: 16px; right: auto; max-width: calc(100vw - 32px); background: #0f172a; color: #fff; padding: 10px 16px; border-radius: 12px; display: flex; align-items: center; gap: 10px; z-index: 12000; transform: translateY(140px); opacity: 0; transition: all 0.3s; font-size: 0.86rem; }
     .toast-status.show { transform: translateY(0); opacity: 1; }
+
+    /* =============================================================
+       MOBILE RESPONSIVE DESIGN (សម្រាប់អេក្រង់ទូរស័ព្ទដៃ និង Tablet)
+       ============================================================= */
+    @media (max-width: 768px) {
+      .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 275px;
+        max-width: 82vw;
+        transform: translateX(-105%);
+        box-shadow: 6px 0 25px rgba(0,0,0,0.35);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .btn-close-sidebar {
+        display: inline-flex;
+      }
+      .btn-mobile-menu {
+        display: inline-flex;
+      }
+      .topbar {
+        height: 60px;
+        padding: 0 12px;
+        gap: 8px;
+      }
+      .view-btn span {
+        display: none; /* លាក់អក្សរលើប៊ូតុងខាងលើ ទុកតែ Icon ដើម្បីកុំឱ្យចង្អៀតលើទូរស័ព្ទ */
+      }
+      .view-btn {
+        min-width: 36px;
+        height: 36px;
+        padding: 0 8px;
+      }
+      .action-bar {
+        padding: 10px 12px 6px;
+        gap: 6px;
+      }
+      .btn-action {
+        padding: 7px 11px;
+        font-size: 0.8rem;
+      }
+      .breadcrumb-bar {
+        padding: 0 12px 8px;
+        font-size: 0.84rem;
+      }
+      .content-scroll {
+        padding: 0 12px 80px;
+      }
+      /* បង្ហាញកាតឯកសារ ២ ជួរឈរស្អាតនៅលើទូរស័ព្ទ */
+      .file-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .card-thumb-box {
+        height: 115px;
+      }
+      .custom-menu {
+        width: 175px;
+      }
+    }
   </style>
-  <script type="module" crossorigin src="./assets/index-Bm18wukJ.js"></script>
+  <script type="module" crossorigin src="./assets/index-BWiFd-6D.js"></script>
 </head>
 <body data-theme="basic">
 
+  <!-- ផ្ទាំងខ្មៅស្រអាប់ពេលបើកម៉ឺនុយលើទូរស័ព្ទ -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeMobileSidebar()"></div>
+
   <!-- ================= Sidebar ================= -->
-  <aside class="sidebar">
+  <aside class="sidebar" id="mainSidebar">
     <div class="logo-brand">
       <div class="logo-icon"><i class="bi bi-telegram"></i></div>
       <div class="logo-text">
         <h2>SOTIP Drive</h2>
         <p>MTProto • Saved Messages</p>
       </div>
+      <button type="button" class="btn-close-sidebar" onclick="closeMobileSidebar()" title="បិទម៉ឺនុយ">
+        <i class="bi bi-x-lg"></i>
+      </button>
     </div>
 
     <ul class="nav-menu">
@@ -255,13 +349,13 @@
         <i class="bi bi-trash3-fill text-danger"></i> ធុងសម្រាម (Trash)
       </li>
       <div class="nav-divider"></div>
-      <li class="nav-item" onclick="syncSavedMessages()">
+      <li class="nav-item" onclick="closeMobileSidebar(); syncSavedMessages();">
         <i class="bi bi-arrow-repeat text-success"></i> Sync ពី Saved Messages
       </li>
-      <li class="nav-item" id="navLoginBtn" onclick="openModal('authModal')">
+      <li class="nav-item" id="navLoginBtn" onclick="closeMobileSidebar(); openModal('authModal');">
         <i class="bi bi-key-fill text-warning"></i> ភ្ជាប់គណនី (Login)
       </li>
-      <li class="nav-item text-danger" id="navLogoutBtn" style="display:none;" onclick="logoutMTProto()">
+      <li class="nav-item text-danger" id="navLogoutBtn" style="display:none;" onclick="closeMobileSidebar(); logoutMTProto();">
         <i class="bi bi-box-arrow-right"></i> ចាកចេញ (Log out)
       </li>
     </ul>
@@ -281,12 +375,17 @@
   <!-- ================= Main Content ================= -->
   <main class="main-content">
     <header class="topbar">
+      <!-- ប៊ូតុងបើកម៉ឺនុយលើទូរស័ព្ទ -->
+      <button type="button" class="btn-mobile-menu" onclick="toggleMobileSidebar()" title="បើកម៉ឺនុយ">
+        <i class="bi bi-list"></i>
+      </button>
+
       <div class="search-bar">
         <i class="bi bi-search text-muted"></i>
         <input type="text" id="searchInput" placeholder="ស្វែងរកឯកសារ ឬ Folder..." oninput="applySearchFilter()">
       </div>
 
-      <div class="d-flex gap-2 align-items-center">
+      <div class="d-flex gap-1 gap-md-2 align-items-center">
         <!-- ប៊ូតុងកែ Font Size និង Line Spacing -->
         <button type="button" class="view-btn" onclick="toggleTypoPopover(event)" title="កំណត់ទំហំអក្សរ និងគម្លាតបន្ទាត់">
           <i class="bi bi-type"></i> <span>អក្សរ</span>
@@ -428,7 +527,7 @@
   <div class="custom-modal-overlay" id="previewModal">
     <div class="custom-modal-box modal-xl-box">
       <div class="cm-header">
-        <h6 class="m-0 fw-bold text-truncate me-2" id="previewTitle" style="max-width:75%;">Preview</h6>
+        <h6 class="m-0 fw-bold text-truncate me-2" id="previewTitle" style="max-width:70%;">Preview</h6>
         <div class="d-flex gap-2">
           <button type="button" class="btn btn-success btn-sm px-3 fw-bold" id="btnDirectDlPreview"><i class="bi bi-download me-1"></i> ទាញយក</button>
           <button type="button" class="btn-close" onclick="closeModal('previewModal')"></button>
