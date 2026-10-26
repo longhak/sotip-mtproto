@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>SOTIP Drive (MTProto VFS Edition)</title>
+  <title>SOTIP Drive (MTProto Edition)</title>
 
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#132e53">
@@ -22,25 +22,15 @@
       --sidebar-width: 265px; --bg-body: #f4f6f9; --bg-panel: #ffffff; --bg-sidebar: #132e53; --bg-topbar: #ffffff;
       --text-sidebar: #ffffff; --text-topbar: #0f172a; --primary: #1e56a0; --accent-gold: #eab308;
       --text-main: #0f172a; --text-muted: #64748b; --border: #e2e8f0; --hover-bg: #f1f5f9;
-      --card-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    }
-    body[data-theme="modern"] {
-      --bg-body: #162a45; --bg-panel: #1f3758; --bg-sidebar: #122238; --bg-topbar: #1f3758;
-      --text-sidebar: #f1f5f9; --text-topbar: #f1f5f9; --primary: #3b82f6; --accent-gold: #facc15;
-      --text-main: #f1f5f9; --text-muted: #94a3b8; --border: #2e4a70; --hover-bg: #27446b;
-      --card-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    }
-    body[data-theme="linear"] {
-      --bg-body: #060911; --bg-panel: #0f1626; --bg-sidebar: #04060c; --bg-topbar: #0a0f1c;
-      --text-sidebar: #f8fafc; --text-topbar: #f8fafc; --primary: #0ea5e9; --accent-gold: #f59e0b;
-      --text-main: #f8fafc; --text-muted: #64748b; --border: #1e293b; --hover-bg: #17223b;
-      --card-shadow: 0 4px 20px rgba(14,165,233,0.12);
+      --card-shadow: 0 4px 12px rgba(0,0,0,0.06);
     }
 
     * { box-sizing: border-box; }
+    
+    /* កំណត់ Font ភាសាអង់គ្លេស Times New Roman និង ខ្មែរ */
     body, input, button, select, textarea {
       margin: 0; padding: 0; background-color: var(--bg-body); color: var(--text-main);
-      font-family: 'Khmer OS Siemreap', 'Battambang', 'Kantumruy Pro', sans-serif !important;
+      font-family: 'Times New Roman', 'Khmer OS Siemreap', 'Battambang', 'Kantumruy Pro', sans-serif !important;
     }
     body { height: 100vh; height: 100dvh; display: flex; overflow: hidden; }
 
@@ -48,11 +38,11 @@
     .sidebar { width: var(--sidebar-width); background: var(--bg-sidebar); color: var(--text-sidebar); display: flex; flex-direction: column; padding: 22px 16px; z-index: 1050; flex-shrink: 0; }
     .logo-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
     .logo-icon { width: 42px; height: 42px; background: rgba(255,255,255,0.15); color: var(--accent-gold); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
-    .logo-text h2 { margin: 0; font-size: 1.15rem; font-weight: 700; color: #fff; }
-    .logo-text p { margin: 0; font-size: 0.72rem; color: rgba(255,255,255,0.75); }
+    .logo-text h2 { margin: 0; font-size: 1.2rem; font-weight: 700; color: #fff; }
+    .logo-text p { margin: 0; font-size: 0.72rem; color: rgba(255,255,255,0.75); font-family: 'Times New Roman', sans-serif; }
 
     .nav-menu { list-style: none; padding: 0; margin: 0; flex: 1; }
-    .nav-item { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 12px; color: rgba(255,255,255,0.85); font-weight: 500; margin-bottom: 6px; cursor: pointer; transition: all 0.2s; }
+    .nav-item { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 12px; color: rgba(255,255,255,0.85); font-weight: 500; margin-bottom: 6px; cursor: pointer; transition: all 0.2s; font-family: 'Khmer OS Siemreap', sans-serif; }
     .nav-item:hover { background-color: rgba(255,255,255,0.12); color: #fff; }
     .nav-item.active { background-color: rgba(255,255,255,0.2); color: #fff; font-weight: 600; border-left: 4px solid var(--accent-gold); }
 
@@ -67,232 +57,170 @@
     .view-btn.active { background-color: var(--primary); color: #fff; border-color: var(--primary); }
 
     .action-bar { padding: 16px 24px 12px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-    .btn-action { position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 10px; font-weight: 600; font-size: 0.88rem; cursor: pointer; background-color: var(--bg-panel); border: 1px solid var(--border); color: var(--text-main); box-shadow: var(--card-shadow); }
+    .btn-action { position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 10px; font-weight: 600; font-size: 0.88rem; cursor: pointer; background-color: var(--bg-panel); border: 1px solid var(--border); color: var(--text-main); box-shadow: var(--card-shadow); font-family: 'Khmer OS Siemreap', sans-serif; }
     .btn-action input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 
     .content-scroll { flex: 1; overflow-y: auto; padding: 0 24px 40px; }
-    .content-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
-    .breadcrumb-title { font-size: 1rem; font-weight: 600; display: flex; align-items: center; gap: 6px; }
-    .breadcrumb-title a { color: var(--text-muted); text-decoration: none; cursor: pointer; }
-    .breadcrumb-title a:hover { color: var(--primary); }
     
-    /* File Cards */
-    .file-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 16px; }
-    .file-grid.list-view { display: flex; flex-direction: column; gap: 8px; }
+    /* -------------------------------------------------------------
+       រចនាបថកាតឯកសារ (បានដក overflow: hidden ចេញ)
+       ------------------------------------------------------------- */
+    .file-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 18px; }
     
-    .file-card { background-color: var(--bg-panel); border: 1px solid var(--border); border-radius: 14px; padding: 10px; text-align: center; position: relative; transition: all 0.2s; box-shadow: var(--card-shadow); display: flex; flex-direction: column; cursor: pointer; overflow: hidden; }
-    .file-card:hover { border-color: var(--primary); transform: translateY(-2px); }
-    
-    .card-thumb-box {
-      width: 100%; height: 120px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
-      font-size: 2.8rem; margin-bottom: 10px; position: relative; overflow: hidden; background: linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.06) 100%);
+    .file-card { 
+      background-color: var(--bg-panel); border: 1px solid var(--border); border-radius: 14px; 
+      padding: 12px; text-align: center; position: relative; transition: all 0.2s; 
+      box-shadow: var(--card-shadow); display: flex; flex-direction: column; 
+      /* កំណត់ overflow ឱ្យអាចលោត Menu ចេញក្រៅបាន */
+      overflow: visible !important; 
+      z-index: 1; 
     }
-    .card-thumb-box img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
-    .file-card:hover .card-thumb-box img { transform: scale(1.04); }
+    .file-card:hover { border-color: var(--primary); transform: translateY(-2px); z-index: 10; }
+    .file-card.has-menu-open { z-index: 9999 !important; border-color: var(--primary); }
     
-    .file-type-preview { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; font-weight: bold; }
-    .file-type-preview i { font-size: 2.8rem; margin-bottom: 2px; }
-    .file-type-preview span { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.85; }
-
-    .ext-badge { position: absolute; bottom: 6px; right: 6px; font-size: 0.6rem; font-weight: 700; padding: 2px 6px; border-radius: 5px; color: #fff; z-index: 2; box-shadow: 0 2px 5px rgba(0,0,0,0.25); }
-    .card-name { font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word; padding: 0 4px; }
-    .card-meta { font-size: 0.72rem; color: var(--text-muted); margin-top: auto; }
-    .card-menu { position: absolute; top: 8px; right: 8px; z-index: 20;}
-
-    /* Dropdown Context Menu */
-    .btn-dots { width: 30px; height: 30px; border-radius: 8px; border: none; background: rgba(0,0,0,0.4); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; backdrop-filter: blur(2px); transition: all 0.2s;}
-    .btn-dots:hover { background: var(--primary); }
-    .custom-menu { display: none; position: absolute; top: 34px; right: 0; width: 190px; background-color: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); padding: 6px; z-index: 1000; text-align: left; }
-    .custom-menu.show { display: block; }
-    .custom-menu-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; font-size: 0.85rem; font-weight: 500; color: var(--text-main); border-radius: 8px; cursor: pointer; user-select: none; }
+    /* -------------------------------------------------------------
+       រចនាបថ 3-dots Menu (ទីតាំង និង Z-Index ថ្មី)
+       ------------------------------------------------------------- */
+    .card-menu { position: absolute; top: 10px; right: 10px; z-index: 50; }
+    .btn-dots { width: 32px; height: 32px; border-radius: 8px; border: none; background: rgba(255,255,255,0.9); color: #475569; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.15); transition: all 0.2s; }
+    .btn-dots:hover { background: var(--bg-body); color: var(--primary); }
+    
+    .custom-menu { 
+      display: none; position: absolute; top: 100%; right: 0; margin-top: 5px; 
+      width: 190px; background-color: var(--bg-panel); border: 1px solid var(--border); 
+      border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); padding: 8px; 
+      z-index: 10000; text-align: left; font-family: 'Khmer OS Siemreap', sans-serif;
+    }
+    .custom-menu.show { display: block; animation: menuFade 0.2s ease; }
+    @keyframes menuFade { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .custom-menu-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; font-size: 0.9rem; font-weight: 500; color: var(--text-main); border-radius: 8px; cursor: pointer; user-select: none; transition: background 0.1s; }
     .custom-menu-item:hover { background-color: var(--hover-bg); }
     .custom-menu-divider { height: 1px; background-color: var(--border); margin: 4px 0; }
 
-    .file-grid.list-view .file-card { flex-direction: row; text-align: left; padding: 8px 14px; gap: 12px; align-items: center; }
-    .file-grid.list-view .card-thumb-box { width: 44px; height: 44px; font-size: 1.4rem; margin-bottom: 0; flex-shrink: 0; }
-    .file-grid.list-view .card-thumb-box img { width: 44px; height: 44px; }
-    .file-grid.list-view .file-type-preview i { font-size: 1.4rem; margin-bottom: 0; }
-    .file-grid.list-view .file-type-preview span { display: none; }
-    .file-grid.list-view .ext-badge { display: none; }
-    .file-grid.list-view .card-menu { position: static; margin-left: auto; }
-    .file-grid.list-view .btn-dots { background: transparent; color: var(--text-muted); }
-    .file-grid.list-view .btn-dots:hover { background: var(--hover-bg); color: var(--text-main); }
+    /* -------------------------------------------------------------
+       រចនាបថរូប Background គ្រប់ប្រភេទ File
+       ------------------------------------------------------------- */
+    .card-thumb-box {
+      width: 100%; height: 130px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 12px; position: relative; overflow: hidden; border: 1px solid rgba(0,0,0,0.05);
+      cursor: pointer;
+    }
+    .card-thumb-box img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
+    .file-card:hover .card-thumb-box img { transform: scale(1.05); }
 
-    /* Transfer Center */
-    .transfer-center { position: fixed; bottom: 20px; right: 20px; width: 350px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 12px 35px rgba(0,0,0,0.3); z-index: 3500; display: none; overflow: hidden; }
-    .transfer-center.active { display: block; }
-    .tc-header { background: var(--bg-sidebar); color: #fff; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; font-weight: 700; }
+    .file-icon-fallback {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      width: 100%; height: 100%; transition: transform 0.3s;
+    }
+    .file-card:hover .file-icon-fallback { transform: scale(1.08); }
 
-    /* Modals */
-    .custom-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(3px); z-index: 2500; display: none; align-items: center; justify-content: center; padding: 16px; }
+    .ext-badge { position: absolute; bottom: 6px; right: 6px; font-size: 0.65rem; font-weight: bold; padding: 3px 8px; border-radius: 6px; color: #fff; z-index: 2; box-shadow: 0 2px 5px rgba(0,0,0,0.25); font-family: 'Times New Roman', sans-serif; letter-spacing: 0.5px; }
+    
+    .card-name { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word; padding: 0 4px; line-height: 1.3; cursor: pointer; }
+    .card-meta { font-size: 0.75rem; color: var(--text-muted); margin-top: auto; font-family: 'Times New Roman', sans-serif; }
+
+    /* Modals & UI Components */
+    .custom-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(3px); z-index: 10500; display: none; align-items: center; justify-content: center; padding: 16px; }
     .custom-modal-overlay.active { display: flex; }
-    .custom-modal-box { background-color: var(--bg-panel); color: var(--text-main); border: 1px solid var(--border); border-radius: 18px; width: 100%; max-width: 460px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.35); }
-    .custom-modal-box.modal-xl-box { max-width: 960px; }
+    .custom-modal-box { background-color: var(--bg-panel); color: var(--text-main); border: 1px solid var(--border); border-radius: 18px; width: 100%; max-width: 480px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.35); }
+    .custom-modal-box.modal-xl-box { max-width: 960px; height: 90vh; display: flex; flex-direction: column; }
+    
     .cm-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid var(--border); }
-    .cm-body { padding: 20px; }
-    .cm-footer { display: flex; justify-content: flex-end; gap: 10px; padding: 14px 20px; border-top: 1px solid var(--border); }
-    .cm-input { width: 100%; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background-color: var(--bg-body); color: var(--text-main); outline: none; }
-    .cm-input:focus { border-color: var(--primary); }
-    #previewBody { background-color: #f1f5f9; min-height: 55vh; max-height: 76vh; overflow: auto; display: flex; align-items: center; justify-content: center; flex-direction: column; width: 100%; }
+    .cm-body { padding: 20px; font-family: 'Khmer OS Siemreap', sans-serif; }
+    .cm-input { width: 100%; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background-color: var(--bg-body); color: var(--text-main); outline: none; font-family: 'Times New Roman', sans-serif; }
+    
+    #previewBody { background-color: #f1f5f9; flex: 1; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-direction: column; width: 100%; position: relative; }
 
-    .toast-status { position: fixed; bottom: 20px; left: 20px; background: #0f172a; color: #fff; padding: 12px 20px; border-radius: 12px; display: flex; align-items: center; gap: 10px; z-index: 4000; transform: translateY(120px); opacity: 0; transition: all 0.3s; font-size: 0.86rem; }
+    .toast-status { position: fixed; bottom: 20px; left: 20px; background: #0f172a; color: #fff; padding: 12px 20px; border-radius: 12px; display: flex; align-items: center; gap: 10px; z-index: 12000; transform: translateY(120px); opacity: 0; transition: all 0.3s; font-size: 0.9rem; font-family: 'Khmer OS Siemreap', sans-serif; }
     .toast-status.show { transform: translateY(0); opacity: 1; }
   </style>
-  <script type="module" crossorigin src="./assets/index-CYpjFXbn.js"></script>
+  <script type="module" crossorigin src="./assets/index-DBEU7_El.js"></script>
 </head>
 <body data-theme="basic">
 
-  <!-- ================= Sidebar ================= -->
   <aside class="sidebar">
     <div class="logo-brand">
       <div class="logo-icon"><i class="bi bi-telegram"></i></div>
       <div class="logo-text">
-        <h2>SOTIP Drive</h2>
-        <p>MTProto • VFS Edition</p>
+        <h2 style="font-family:'Times New Roman', sans-serif;">SOTIP Drive</h2>
+        <p>MTProto • Saved Messages</p>
       </div>
     </div>
 
     <ul class="nav-menu">
-      <li class="nav-item active" id="navMyDrive" onclick="switchTab('drive')">
-        <i class="bi bi-house-door-fill"></i> ថតខ្ញុំ (My Drive)
-      </li>
-      <li class="nav-item" id="navDocs" onclick="switchTab('DOCS')">
-        <i class="bi bi-file-earmark-text-fill text-info"></i> ឯកសារ (Docs)
-      </li>
-      <li class="nav-item" id="navMedia" onclick="switchTab('MEDIA')">
-        <i class="bi bi-play-btn-fill text-danger"></i> រូបភាព & វីដេអូ
-      </li>
-      <li class="nav-item" id="navTrash" onclick="switchTab('trash')">
-        <i class="bi bi-trash3-fill text-warning"></i> ធុងសម្រាម (Trash)
-      </li>
-      <li class="nav-item mt-3" onclick="syncSavedMessages()">
-        <i class="bi bi-arrow-repeat text-success"></i> Sync ទិន្នន័យ
-      </li>
-      <!-- ប៊ូតុងនេះនឹងលាក់ដោយស្វ័យប្រវត្តិក្រោយពេល Login ជោគជ័យ -->
-      <li class="nav-item" id="navLoginBtn" onclick="openModal('authModal')">
-        <i class="bi bi-key-fill text-warning"></i> ភ្ជាប់គណនី (Login)
-      </li>
-      <!-- ប៊ូតុង Log out នឹងបង្ហាញតែពេលភ្ជាប់គណនីរួចប៉ុណ្ណោះ -->
-      <li class="nav-item text-danger" id="navLogoutBtn" style="display:none;" onclick="logoutMTProto()">
-        <i class="bi bi-box-arrow-right"></i> ចាកចេញ (Log out)
-      </li>
+      <li class="nav-item active" onclick="filterByCategory('ALL', this)"><i class="bi bi-collection-fill"></i> ឯកសារទាំងអស់</li>
+      <li class="nav-item" onclick="filterByCategory('DOCS', this)"><i class="bi bi-file-earmark-pdf-fill text-danger"></i> ឯកសារ & PDF</li>
+      <li class="nav-item" onclick="filterByCategory('MEDIA', this)"><i class="bi bi-play-btn-fill text-info"></i> រូបភាព & វីដេអូ</li>
+      <li class="nav-item" onclick="filterByCategory('ZIP', this)"><i class="bi bi-file-earmark-zip-fill text-warning"></i> បណ្ណសារ (ZIP)</li>
+      <li class="nav-item" onclick="syncSavedMessages()"><i class="bi bi-arrow-repeat text-success"></i> Sync ពី Saved Messages</li>
+      <li class="nav-item" id="navLoginBtn" onclick="openModal('authModal')"><i class="bi bi-key-fill text-warning"></i> ភ្ជាប់គណនី (Login)</li>
+      <li class="nav-item text-danger" id="navLogoutBtn" style="display:none;" onclick="logoutMTProto()"><i class="bi bi-box-arrow-right"></i> ចាកចេញ (Log out)</li>
     </ul>
 
     <div class="storage-area">
       <div class="d-flex justify-content-between small fw-bold mb-1">
-        <span id="accountStatusText">កំពុងពិនិត្យគណនី...</span>
-        <span id="totalStorageText">0 B</span>
+        <span id="accountStatusText" style="font-family:'Khmer OS Siemreap', sans-serif;">កំពុងពិនិត្យ...</span>
+        <span id="totalStorageText" style="font-family:'Times New Roman', sans-serif;">0 B</span>
       </div>
-      <div class="progress mb-2" style="height:6px; background:rgba(255,255,255,0.2);">
-        <div class="progress-bar bg-warning" style="width:100%;"></div>
-      </div>
-      <p class="m-0" style="font-size:0.7rem; opacity:0.8;">VFS over Saved Messages</p>
+      <div class="progress mb-2" style="height:6px; background:rgba(255,255,255,0.2);"><div class="progress-bar bg-warning" style="width:100%;"></div></div>
     </div>
   </aside>
 
-  <!-- ================= Main Content ================= -->
   <main class="main-content">
     <header class="topbar">
       <div class="search-bar">
         <i class="bi bi-search text-muted"></i>
-        <input type="text" id="searchInput" placeholder="ស្វែងរកឯកសារ ឬ Folder..." oninput="renderGrid()">
-      </div>
-      <div class="d-flex gap-2">
-        <button type="button" class="view-btn" onclick="cycleTheme()" title="ប្ដូរពណ៌ Theme"><i class="bi bi-palette-fill text-warning"></i></button>
-        <button type="button" class="view-btn active" id="btnGrid" onclick="setView('grid')"><i class="bi bi-grid-fill"></i></button>
-        <button type="button" class="view-btn" id="btnList" onclick="setView('list')"><i class="bi bi-list-ul"></i></button>
+        <input type="text" id="searchInput" placeholder="ស្វែងរកឯកសារក្នុង Saved Messages..." oninput="applySearchFilter()" style="font-family:'Khmer OS Siemreap', 'Times New Roman', sans-serif;">
       </div>
     </header>
 
-    <div class="action-bar" id="actionBar">
-      <button type="button" class="btn-action" onclick="openCreateFolderModal()">
-        <i class="bi bi-folder-plus text-warning"></i> Folder ថ្មី
-      </button>
+    <div class="action-bar">
       <div class="btn-action">
         <i class="bi bi-cloud-arrow-up-fill text-primary"></i> Upload ឯកសារ
         <input type="file" id="fileUploadInput" multiple onchange="uploadFilesMTProto(this.files)">
       </div>
-      <span class="ms-auto small text-muted" id="itemCountLabel">0 ធាតុ</span>
+      <button type="button" class="btn-action" onclick="syncSavedMessages()"><i class="bi bi-arrow-repeat text-success"></i> ទាញទិន្នន័យ (Sync)</button>
+      <span class="ms-auto small text-muted fw-bold" id="itemCountLabel" style="font-family:'Khmer OS Siemreap', sans-serif;">0 ឯកសារ</span>
     </div>
 
-    <div class="content-scroll">
-      <div class="content-header" id="breadcrumbHeader">
-        <div class="breadcrumb-title" id="breadcrumb"><span>🏠 ថតខ្ញុំ</span></div>
-      </div>
+    <div class="content-scroll" onclick="closeAllMenus()">
       <div class="file-grid" id="fileGrid"></div>
     </div>
   </main>
 
-  <!-- Transfer Center -->
-  <div class="transfer-center" id="transferCenter">
-    <div class="tc-header">
-      <span id="tcTitle">កំពុងបញ្ជូនឯកសារ...</span>
-      <span class="badge bg-warning text-dark" id="tcSpeed">0 KB/s</span>
-    </div>
-    <div class="p-3">
-      <div class="small fw-bold text-truncate mb-1" id="tcFileName">...</div>
-      <div class="d-flex justify-content-between small text-muted mb-1">
-        <span id="tcSubText">MTProto Direct Stream</span>
-        <span id="tcPercent" class="fw-bold text-primary">0%</span>
-      </div>
-      <div class="progress" style="height:8px;">
-        <div class="progress-bar progress-bar-striped progress-bar-animated" id="tcBar" style="width:0%"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast -->
   <div class="toast-status" id="toastBox">
     <div class="spinner-border spinner-border-sm" id="toastSpin"></div>
     <span id="toastMsg">កំពុងដំណើរការ...</span>
   </div>
 
-  <!-- Modals -->
-  <!-- Auth Modal -->
   <div class="custom-modal-overlay" id="authModal">
     <div class="custom-modal-box">
-      <div class="cm-header">
-        <h6 class="m-0 fw-bold"><i class="bi bi-telegram text-primary me-2"></i>ភ្ជាប់គណនី Telegram (MTProto API)</h6>
-      </div>
+      <div class="cm-header"><h6 class="m-0 fw-bold" style="font-family:'Khmer OS Siemreap', sans-serif;"><i class="bi bi-telegram text-primary me-2"></i>ភ្ជាប់គណនី Telegram</h6></div>
       <div class="cm-body">
-        <div class="alert alert-info py-2 small mb-3">
-          យក <b>api_id</b> និង <b>api_hash</b> ពីវេបសាយផ្លូវការ <a href="https://my.telegram.org" target="_blank" class="fw-bold">my.telegram.org</a>។
-        </div>
-        <div class="mb-2">
-          <label class="small fw-bold mb-1">1. App api_id (ជាលេខ)</label>
-          <input type="number" class="cm-input" id="inpApiId">
-        </div>
-        <div class="mb-2">
-          <label class="small fw-bold mb-1">2. App api_hash</label>
-          <input type="text" class="cm-input" id="inpApiHash">
-        </div>
-        <div class="mb-3">
-          <label class="small fw-bold mb-1">3. លេខទូរស័ព្ទ Telegram (មាន +855)</label>
-          <input type="text" class="cm-input" id="inpPhone">
-        </div>
+        <div class="mb-2"><label class="small fw-bold mb-1">1. App api_id</label><input type="number" class="cm-input" id="inpApiId"></div>
+        <div class="mb-2"><label class="small fw-bold mb-1">2. App api_hash</label><input type="text" class="cm-input" id="inpApiHash"></div>
+        <div class="mb-3"><label class="small fw-bold mb-1">3. Phone Number (+855...)</label><input type="text" class="cm-input" id="inpPhone"></div>
+        
         <div id="otpStepBox" style="display:none;" class="p-3 rounded border bg-light text-dark mb-3">
-          <label class="small fw-bold text-primary mb-1" id="otpPromptLabel">📩 សូមបញ្ចូលលេខកូដ OTP៖</label>
+          <label class="small fw-bold text-primary mb-2" id="otpPromptLabel">📩 សូមបញ្ចូលលេខកូដ៖</label>
           <div class="d-flex gap-2">
-            <input type="text" class="form-control" id="inpDynamicCode">
-            <button type="button" class="btn btn-success fw-bold px-3" id="btnSubmitCode">បញ្ជាក់</button>
+            <input type="text" class="form-control" id="inpDynamicCode" style="font-family:'Times New Roman', sans-serif;">
+            <button type="button" class="btn btn-success fw-bold" id="btnSubmitCode">បញ្ជាក់</button>
           </div>
         </div>
-        <div class="d-flex justify-content-end">
-          <button type="button" class="btn btn-primary fw-bold px-4" onclick="startMTProtoLogin()">ភ្ជាប់ និង Login</button>
-        </div>
+        
+        <div class="text-end"><button type="button" class="btn btn-primary fw-bold px-4" onclick="startMTProtoLogin()">Login</button></div>
       </div>
     </div>
   </div>
 
-  <!-- Preview Modal -->
   <div class="custom-modal-overlay" id="previewModal">
     <div class="custom-modal-box modal-xl-box">
       <div class="cm-header">
-        <h6 class="m-0 fw-bold text-truncate me-2" id="previewTitle">មើលជាមុន</h6>
-        <div class="d-flex gap-2 align-items-center">
-          <button type="button" class="btn btn-primary btn-sm px-3 fw-bold" id="btnDirectDlPreview">
-            <i class="bi bi-download me-1"></i> ទាញយក
-          </button>
+        <h6 class="m-0 fw-bold text-truncate me-2" id="previewTitle" style="font-family:'Times New Roman', 'Khmer OS Siemreap', sans-serif; max-width:70%;">Preview</h6>
+        <div class="d-flex gap-2">
+          <button type="button" class="btn btn-success btn-sm px-3 fw-bold" id="btnDirectDlPreview"><i class="bi bi-download"></i></button>
           <button type="button" class="btn-close" onclick="closeModal('previewModal')"></button>
         </div>
       </div>
@@ -300,80 +228,5 @@
     </div>
   </div>
 
-  <!-- Folder Modal -->
-  <div class="custom-modal-overlay" id="folderModal">
-    <div class="custom-modal-box">
-      <div class="cm-header">
-        <h6 class="m-0 fw-bold"><i class="bi bi-folder-plus text-warning me-2"></i>បង្កើត Folder ថ្មី</h6>
-        <button type="button" class="btn-close" onclick="closeModal('folderModal')"></button>
-      </div>
-      <div class="cm-body">
-        <input type="text" class="cm-input" id="inpFolderName" placeholder="បញ្ចូលឈ្មោះ Folder...">
-      </div>
-      <div class="cm-footer">
-        <button type="button" class="btn btn-secondary" onclick="closeModal('folderModal')">បោះបង់</button>
-        <button type="button" class="btn btn-primary px-4" onclick="submitCreateFolder()">បង្កើត</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Rename Modal -->
-  <div class="custom-modal-overlay" id="renameModal">
-    <div class="custom-modal-box">
-      <div class="cm-header">
-        <h6 class="m-0 fw-bold"><i class="bi bi-pencil-square text-warning me-2"></i>ប្ដូរឈ្មោះ</h6>
-        <button type="button" class="btn-close" onclick="closeModal('renameModal')"></button>
-      </div>
-      <div class="cm-body">
-        <input type="hidden" id="renameId">
-        <input type="hidden" id="renameType">
-        <input type="text" class="cm-input" id="inpRename" placeholder="ឈ្មោះថ្មី...">
-      </div>
-      <div class="cm-footer">
-        <button type="button" class="btn btn-secondary" onclick="closeModal('renameModal')">បោះបង់</button>
-        <button type="button" class="btn btn-warning px-4 fw-bold" onclick="submitRename()">រក្សាទុក</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Move Modal -->
-  <div class="custom-modal-overlay" id="moveModal">
-    <div class="custom-modal-box">
-      <div class="cm-header">
-        <h6 class="m-0 fw-bold"><i class="bi bi-arrows-move text-info me-2"></i>ផ្លាស់ទីទៅកាន់...</h6>
-        <button type="button" class="btn-close" onclick="closeModal('moveModal')"></button>
-      </div>
-      <div class="cm-body">
-        <input type="hidden" id="moveId">
-        <input type="hidden" id="moveType">
-        <select class="cm-input" id="selMoveTarget"></select>
-      </div>
-      <div class="cm-footer">
-        <button type="button" class="btn btn-secondary" onclick="closeModal('moveModal')">បោះបង់</button>
-        <button type="button" class="btn btn-info text-white px-4 fw-bold" onclick="submitMove()">ផ្លាស់ទី</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Delete Confirm Modal -->
-  <div class="custom-modal-overlay" id="deleteModal">
-    <div class="custom-modal-box">
-      <div class="cm-header">
-        <h6 class="m-0 fw-bold text-danger"><i class="bi bi-exclamation-triangle-fill me-2"></i>បញ្ជាក់ការលុប</h6>
-        <button type="button" class="btn-close" onclick="closeModal('deleteModal')"></button>
-      </div>
-      <div class="cm-body">
-        <input type="hidden" id="delId">
-        <input type="hidden" id="delType">
-        <p class="mb-0" id="delMsg">តើអ្នកចង់លុបមែនទេ?</p>
-      </div>
-      <div class="cm-footer">
-        <button type="button" class="btn btn-secondary" onclick="closeModal('deleteModal')">បោះបង់</button>
-        <button type="button" class="btn btn-danger px-4 fw-bold" id="btnConfirmDelete">លុបចោល</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ================= ម៉ាស៊ីន MTProto និង VFS ================= -->
 </body>
 </html>
