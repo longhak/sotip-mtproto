@@ -68,41 +68,17 @@
     }
 
     * { box-sizing: border-box; }
-
-    /* អង់គ្លេសប្រើ Times New Roman ឯខ្មែររក្សា Font ខ្មែរដើម និងមិនដាច់ដៃជើង */
     body, input, button, select, textarea {
-      margin: 0;
-      padding: 0;
-      background-color: var(--bg-body);
-      color: var(--text-main);
+      margin: 0; padding: 0; background-color: var(--bg-body); color: var(--text-main);
       font-family: 'Times New Roman', 'Khmer OS Siemreap', 'Battambang', 'Kantumruy Pro', sans-serif !important;
       line-height: var(--user-line-height);
     }
     body { height: 100vh; height: 100dvh; display: flex; overflow: hidden; width: 100vw; }
 
-    /* ផ្ទាំងខ្មៅស្រអាប់ពេលបើក Sidebar លើទូរស័ព្ទ */
-    .sidebar-backdrop {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(2px);
-      z-index: 2000;
-    }
+    .sidebar-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); backdrop-filter: blur(2px); z-index: 2000; }
     .sidebar-backdrop.show { display: block; }
 
-    /* Sidebar */
-    .sidebar {
-      width: var(--sidebar-width);
-      background: var(--bg-sidebar);
-      color: var(--text-sidebar);
-      display: flex;
-      flex-direction: column;
-      padding: 20px 16px;
-      z-index: 2100;
-      flex-shrink: 0;
-      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+    .sidebar { width: var(--sidebar-width); background: var(--bg-sidebar); color: var(--text-sidebar); display: flex; flex-direction: column; padding: 20px 16px; z-index: 2100; flex-shrink: 0; transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1); }
     .logo-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
     .logo-icon { width: 42px; height: 42px; background: rgba(255,255,255,0.15); color: var(--accent-gold); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
     .logo-text h2 { margin: 0; font-size: 1.22rem; font-weight: 700; color: #fff; line-height: 1.3; }
@@ -117,7 +93,6 @@
 
     .storage-area { background-color: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.15); border-radius: 14px; padding: 14px; margin-top: auto; color: #fff; }
 
-    /* Main Content */
     .main-content { flex: 1; display: flex; flex-direction: column; overflow-x: hidden; min-width: 0; width: 100%; }
     .topbar { height: 66px; background: var(--bg-topbar); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; gap: 10px; position: relative; z-index: 200; flex-shrink: 0; }
     
@@ -130,7 +105,6 @@
     .view-btn:hover { border-color: var(--primary); }
     .view-btn.active { background-color: var(--primary); color: #fff; border-color: var(--primary); }
 
-    /* Font & Line Spacing Popover */
     .typo-popover { display: none; position: absolute; top: 62px; right: 16px; width: 280px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 14px; box-shadow: 0 12px 32px rgba(0,0,0,0.28); padding: 16px; z-index: 3000; }
     .typo-popover.show { display: block; }
 
@@ -139,7 +113,6 @@
     .btn-action:hover { border-color: var(--primary); }
     .btn-action input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 
-    /* Breadcrumb Navigation */
     .breadcrumb-bar { padding: 0 20px 10px; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; font-size: 0.9rem; }
     .bc-item { cursor: pointer; color: var(--text-muted); font-weight: 600; padding: 2px 8px; border-radius: 8px; transition: all 0.15s; }
     .bc-item:hover { background: var(--hover-bg); color: var(--primary); }
@@ -147,9 +120,6 @@
 
     .content-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 0 20px 70px; }
     
-    /* -------------------------------------------------------------
-       រចនាបថកាតឯកសារ & Folder
-       ------------------------------------------------------------- */
     .file-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 16px; }
     .file-grid.list-view { display: flex; flex-direction: column; gap: 10px; }
     
@@ -162,7 +132,6 @@
     .file-card:hover { border-color: var(--primary); transform: translateY(-2px); z-index: 10; }
     .file-card.has-menu-open { z-index: 9999 !important; border-color: var(--primary); }
     
-    /* 3-dots Menu */
     .card-menu { position: absolute; top: 8px; right: 8px; z-index: 50; }
     .btn-dots { width: 32px; height: 32px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.08); background: rgba(255,255,255,0.92); color: #334155; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.05rem; box-shadow: 0 2px 6px rgba(0,0,0,0.12); transition: all 0.2s; }
     .btn-dots:hover { background: #fff; color: var(--primary); }
@@ -180,7 +149,6 @@
     .custom-menu-item:hover { background-color: var(--hover-bg); }
     .custom-menu-divider { height: 1px; background-color: var(--border); margin: 4px 0; }
 
-    /* ប្រអប់រូបក្របមុខ (Thumbnail / Page 1 Cover) */
     .card-thumb-box {
       width: 100%; height: 135px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
       margin-bottom: 8px; position: relative; overflow: hidden; border: 1px solid rgba(0,0,0,0.06);
@@ -192,7 +160,6 @@
     .file-icon-fallback { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; transition: transform 0.3s; }
     .file-card:hover .file-icon-fallback { transform: scale(1.06); }
 
-    /* ក្របទំព័រទី ១ សម្រាប់ឯកសារអត្ថបទ (Word / TXT / CSV) */
     .doc-page-cover {
       width: 88%; height: 90%; background: #ffffff; color: #1e293b; border-radius: 6px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.12); padding: 7px 9px; text-align: left;
@@ -207,7 +174,6 @@
       line-height: 1.3; letter-spacing: 0.5px;
     }
     
-    /* ការពារកុំឱ្យដាច់ស្រៈ និងជើងអក្សរខ្មែរ */
     .card-name {
       font-size: var(--user-font-size);
       line-height: var(--user-line-height);
@@ -223,19 +189,16 @@
     }
     .card-meta { font-size: 0.74rem; color: var(--text-muted); margin-top: auto; line-height: 1.4; }
 
-    /* List View */
     .file-grid.list-view .file-card { flex-direction: row; text-align: left; padding: 10px 14px; gap: 12px; align-items: center; }
     .file-grid.list-view .card-thumb-box { width: 50px; height: 50px; margin-bottom: 0; flex-shrink: 0; }
     .file-grid.list-view .card-name { -webkit-line-clamp: 1; margin-bottom: 2px; padding-right: 28px; }
     .file-grid.list-view .card-menu { top: 50%; right: 10px; transform: translateY(-50%); }
     .file-grid.list-view .custom-menu { top: 100%; right: 0; transform: none; }
 
-    /* Transfer Center */
     .transfer-center { position: fixed; bottom: 20px; right: 20px; width: 340px; max-width: calc(100vw - 24px); background: var(--bg-panel); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 12px 35px rgba(0,0,0,0.3); z-index: 3500; display: none; overflow: hidden; }
     .transfer-center.active { display: block; }
     .tc-header { background: var(--bg-sidebar); color: #fff; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; font-weight: 700; }
 
-    /* Modals */
     .custom-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(3px); z-index: 10500; display: none; align-items: center; justify-content: center; padding: 12px; }
     .custom-modal-overlay.active { display: flex; }
     .custom-modal-box { background-color: var(--bg-panel); color: var(--text-main); border: 1px solid var(--border); border-radius: 18px; width: 100%; max-width: 480px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.35); }
@@ -248,78 +211,29 @@
     .toast-status { position: fixed; bottom: 16px; left: 16px; right: auto; max-width: calc(100vw - 32px); background: #0f172a; color: #fff; padding: 10px 16px; border-radius: 12px; display: flex; align-items: center; gap: 10px; z-index: 12000; transform: translateY(140px); opacity: 0; transition: all 0.3s; font-size: 0.86rem; }
     .toast-status.show { transform: translateY(0); opacity: 1; }
 
-    /* =============================================================
-       MOBILE RESPONSIVE DESIGN (សម្រាប់អេក្រង់ទូរស័ព្ទដៃ និង Tablet)
-       ============================================================= */
     @media (max-width: 768px) {
-      .sidebar {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        width: 275px;
-        max-width: 82vw;
-        transform: translateX(-105%);
-        box-shadow: 6px 0 25px rgba(0,0,0,0.35);
-      }
-      .sidebar.open {
-        transform: translateX(0);
-      }
-      .btn-close-sidebar {
-        display: inline-flex;
-      }
-      .btn-mobile-menu {
-        display: inline-flex;
-      }
-      .topbar {
-        height: 60px;
-        padding: 0 12px;
-        gap: 8px;
-      }
-      .view-btn span {
-        display: none; /* លាក់អក្សរលើប៊ូតុងខាងលើ ទុកតែ Icon ដើម្បីកុំឱ្យចង្អៀតលើទូរស័ព្ទ */
-      }
-      .view-btn {
-        min-width: 36px;
-        height: 36px;
-        padding: 0 8px;
-      }
-      .action-bar {
-        padding: 10px 12px 6px;
-        gap: 6px;
-      }
-      .btn-action {
-        padding: 7px 11px;
-        font-size: 0.8rem;
-      }
-      .breadcrumb-bar {
-        padding: 0 12px 8px;
-        font-size: 0.84rem;
-      }
-      .content-scroll {
-        padding: 0 12px 80px;
-      }
-      /* បង្ហាញកាតឯកសារ ២ ជួរឈរស្អាតនៅលើទូរស័ព្ទ */
-      .file-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-      }
-      .card-thumb-box {
-        height: 115px;
-      }
-      .custom-menu {
-        width: 175px;
-      }
+      .sidebar { position: fixed; top: 0; bottom: 0; left: 0; width: 275px; max-width: 82vw; transform: translateX(-105%); box-shadow: 6px 0 25px rgba(0,0,0,0.35); }
+      .sidebar.open { transform: translateX(0); }
+      .btn-close-sidebar { display: inline-flex; }
+      .btn-mobile-menu { display: inline-flex; }
+      .topbar { height: 60px; padding: 0 12px; gap: 8px; }
+      .view-btn span { display: none; }
+      .view-btn { min-width: 36px; height: 36px; padding: 0 8px; }
+      .action-bar { padding: 10px 12px 6px; gap: 6px; }
+      .btn-action { padding: 7px 11px; font-size: 0.8rem; }
+      .breadcrumb-bar { padding: 0 12px 8px; font-size: 0.84rem; }
+      .content-scroll { padding: 0 12px 80px; }
+      .file-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .card-thumb-box { height: 115px; }
+      .custom-menu { width: 175px; }
     }
   </style>
-  <script type="module" crossorigin src="./assets/index-BWiFd-6D.js"></script>
+  <script type="module" crossorigin src="./assets/index-BsNWR5pW.js"></script>
 </head>
 <body data-theme="basic">
 
-  <!-- ផ្ទាំងខ្មៅស្រអាប់ពេលបើកម៉ឺនុយលើទូរស័ព្ទ -->
   <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeMobileSidebar()"></div>
 
-  <!-- ================= Sidebar ================= -->
   <aside class="sidebar" id="mainSidebar">
     <div class="logo-brand">
       <div class="logo-icon"><i class="bi bi-telegram"></i></div>
@@ -372,10 +286,8 @@
     </div>
   </aside>
 
-  <!-- ================= Main Content ================= -->
   <main class="main-content">
     <header class="topbar">
-      <!-- ប៊ូតុងបើកម៉ឺនុយលើទូរស័ព្ទ -->
       <button type="button" class="btn-mobile-menu" onclick="toggleMobileSidebar()" title="បើកម៉ឺនុយ">
         <i class="bi bi-list"></i>
       </button>
@@ -386,11 +298,9 @@
       </div>
 
       <div class="d-flex gap-1 gap-md-2 align-items-center">
-        <!-- ប៊ូតុងកែ Font Size និង Line Spacing -->
         <button type="button" class="view-btn" onclick="toggleTypoPopover(event)" title="កំណត់ទំហំអក្សរ និងគម្លាតបន្ទាត់">
           <i class="bi bi-type"></i> <span>អក្សរ</span>
         </button>
-        <!-- ប៊ូតុងប្ដូរ Theme (Basic / Modern / Linear) -->
         <button type="button" class="view-btn" onclick="cycleTheme()" title="ប្ដូរពណ៌ Theme">
           <i class="bi bi-palette-fill text-warning"></i> <span id="themeNameLabel">Basic</span>
         </button>
@@ -402,7 +312,6 @@
         </button>
       </div>
 
-      <!-- ផ្ទាំងសារ៉េទំហំអក្សរ និង Line Spacing -->
       <div class="typo-popover" id="typoPopover" onclick="event.stopPropagation()">
         <div class="fw-bold small mb-2"><i class="bi bi-sliders me-1 text-primary"></i> កំណត់អក្សរខ្មែរ & អង់គ្លេស</div>
         <div class="mb-3">
@@ -433,7 +342,6 @@
     </div>
   </main>
 
-  <!-- Transfer Center -->
   <div class="transfer-center" id="transferCenter">
     <div class="tc-header">
       <span id="tcTitle">កំពុងបញ្ជូនឯកសារ...</span>
@@ -451,13 +359,11 @@
     </div>
   </div>
 
-  <!-- Toast -->
   <div class="toast-status" id="toastBox">
     <div class="spinner-border spinner-border-sm" id="toastSpin"></div>
     <span id="toastMsg">កំពុងដំណើរការ...</span>
   </div>
 
-  <!-- Modal 1: Login -->
   <div class="custom-modal-overlay" id="authModal">
     <div class="custom-modal-box">
       <div class="cm-header">
@@ -479,7 +385,6 @@
     </div>
   </div>
 
-  <!-- Modal 2: Create Folder -->
   <div class="custom-modal-overlay" id="folderModal">
     <div class="custom-modal-box">
       <div class="cm-header">
@@ -493,7 +398,6 @@
     </div>
   </div>
 
-  <!-- Modal 3: Rename File or Folder -->
   <div class="custom-modal-overlay" id="renameModal">
     <div class="custom-modal-box">
       <div class="cm-header">
@@ -508,7 +412,6 @@
     </div>
   </div>
 
-  <!-- Modal 4: Move File or Folder -->
   <div class="custom-modal-overlay" id="moveModal">
     <div class="custom-modal-box">
       <div class="cm-header">
@@ -523,7 +426,6 @@
     </div>
   </div>
 
-  <!-- Modal 5: Preview -->
   <div class="custom-modal-overlay" id="previewModal">
     <div class="custom-modal-box modal-xl-box">
       <div class="cm-header">
