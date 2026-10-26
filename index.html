@@ -127,13 +127,14 @@
     .view-btn.active { background-color: var(--primary); color: #fff; border-color: var(--primary); }
 
     .cloud-sync-pill {
-      display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px;
-      border-radius: 20px; font-size: 0.76rem; font-weight: 600;
-      background: rgba(16, 185, 129, 0.12); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.25);
-      white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px;
+      border-radius: 20px; font-size: 0.78rem; font-weight: 600;
+      background: rgba(16, 185, 129, 0.14); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);
+      white-space: nowrap; cursor: pointer; user-select: none; transition: all 0.2s;
     }
+    .cloud-sync-pill:hover { background: rgba(16, 185, 129, 0.24); }
     .cloud-sync-pill.syncing {
-      background: rgba(234, 179, 8, 0.15); color: #d97706; border-color: rgba(234, 179, 8, 0.3);
+      background: rgba(234, 179, 8, 0.18); color: #d97706; border-color: rgba(234, 179, 8, 0.35);
     }
 
     .typo-popover { display: none; position: absolute; top: 62px; right: 16px; width: 280px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 14px; box-shadow: 0 12px 32px rgba(0,0,0,0.28); padding: 16px; z-index: 3000; }
@@ -259,7 +260,7 @@
       .custom-menu { width: 175px; }
     }
   </style>
-  <script type="module" crossorigin src="./assets/index-CCCRKVfw.js"></script>
+  <script type="module" crossorigin src="./assets/index--6l-BAyi.js"></script>
 </head>
 <body data-theme="basic">
 
@@ -297,6 +298,9 @@
       <li class="nav-item" onclick="closeMobileSidebar(); syncSavedMessages();">
         <i class="bi bi-arrow-repeat text-success"></i> Sync ពី Saved Messages
       </li>
+      <li class="nav-item" onclick="closeMobileSidebar(); forceUploadVFSNow();">
+        <i class="bi bi-cloud-arrow-up-fill text-info"></i> បង្ហោះ JSON Sync ឥឡូវនេះ
+      </li>
       <li class="nav-item" id="navLoginBtn" onclick="closeMobileSidebar(); openModal('authModal');">
         <i class="bi bi-key-fill text-warning"></i> ភ្ជាប់គណនី (Login)
       </li>
@@ -313,7 +317,7 @@
       <div class="progress mb-2" style="height:6px; background:rgba(255,255,255,0.2);">
         <div class="progress-bar bg-warning" style="width:100%;"></div>
       </div>
-      <p class="m-0" style="font-size:0.72rem; opacity:0.85;">Saved Messages • JSON Cloud Sync</p>
+      <p class="m-0" style="font-size:0.72rem; opacity:0.85;">sotip_drive_vfs.json • Cloud Sync</p>
     </div>
   </aside>
 
@@ -329,8 +333,8 @@
       </div>
 
       <div class="d-flex gap-1 gap-md-2 align-items-center">
-        <div class="cloud-sync-pill d-none d-sm-inline-flex" id="cloudSyncBadge" title="ស្ថានភាព Sync ឯកសារ JSON ក្នុង Saved Messages">
-          <i class="bi bi-cloud-check-fill"></i> <span id="cloudSyncText">JSON Synced</span>
+        <div class="cloud-sync-pill" id="cloudSyncBadge" onclick="forceUploadVFSNow()" title="ចុចទីនេះដើម្បីបង្ហោះឯកសារ sotip_drive_vfs.json ទៅ Saved Messages ភ្លាមៗ">
+          <i class="bi bi-cloud-check-fill"></i> <span id="cloudSyncText">JSON Sync</span>
         </div>
         <button type="button" class="view-btn" onclick="toggleTypoPopover(event)" title="កំណត់ទំហំអក្សរ និងគម្លាតបន្ទាត់">
           <i class="bi bi-type"></i> <span>អក្សរ</span>
