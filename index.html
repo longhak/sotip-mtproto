@@ -145,7 +145,57 @@
     .action-bar { padding: 12px 20px 8px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .btn-action { position: relative; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 14px; border-radius: 10px; font-weight: 600; font-size: 0.86rem; cursor: pointer; background-color: var(--bg-panel); border: 1px solid var(--border); color: var(--text-main); box-shadow: var(--card-shadow); line-height: 1.6; white-space: nowrap; }
     .btn-action:hover { border-color: var(--primary); }
+    .btn-action.active-mode { background-color: var(--primary); color: #fff; border-color: var(--primary); }
     .btn-action input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+    /* របារបញ្ជាពេលជ្រើសរើសឯកសារច្រើន (Bulk Selection Bar) */
+    .bulk-selection-bar {
+      display: none;
+      margin: 0 20px 10px;
+      padding: 8px 14px;
+      border-radius: 12px;
+      background: var(--primary);
+      color: #fff;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      box-shadow: 0 6px 18px rgba(30, 86, 160, 0.25);
+      animation: menuFade 0.18s ease;
+    }
+    .bulk-selection-bar.show {
+      display: flex;
+    }
+    .bulk-btn {
+      border: 1px solid rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .bulk-btn:hover {
+      background: rgba(255,255,255,0.28);
+    }
+    .bulk-btn.btn-warn {
+      background: #eab308;
+      color: #0f172a;
+      border-color: #eab308;
+    }
+    .bulk-btn.btn-warn:hover {
+      background: #facc15;
+    }
+    .bulk-btn.btn-danger-soft {
+      background: rgba(239, 68, 68, 0.85);
+      border-color: rgba(255,255,255,0.25);
+    }
 
     .breadcrumb-bar { padding: 0 20px 10px; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; font-size: 0.9rem; }
     .bc-item { cursor: pointer; color: var(--text-muted); font-weight: 600; padding: 2px 8px; border-radius: 8px; transition: all 0.15s; }
@@ -165,6 +215,43 @@
     }
     .file-card:hover { border-color: var(--primary); transform: translateY(-2px); z-index: 10; }
     .file-card.has-menu-open { z-index: 9999 !important; border-color: var(--primary); }
+    .file-card.selected {
+      border: 2px solid var(--primary) !important;
+      background-color: rgba(59, 130, 246, 0.08);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.16);
+    }
+
+    /* ប៊ូតុងធីកជ្រើសរើសឯកសារ (Multi-select Checkbox) */
+    .card-select-wrap {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      z-index: 50;
+    }
+    .btn-select-check {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(100, 116, 139, 0.35);
+      background: rgba(255, 255, 255, 0.92);
+      color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+      transition: all 0.15s;
+    }
+    .btn-select-check:hover {
+      border-color: var(--primary);
+      transform: scale(1.06);
+    }
+    .file-card.selected .btn-select-check {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
     
     .card-menu { position: absolute; top: 8px; right: 8px; z-index: 50; }
     .btn-dots { width: 32px; height: 32px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.08); background: rgba(255,255,255,0.92); color: #334155; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.05rem; box-shadow: 0 2px 6px rgba(0,0,0,0.12); transition: all 0.2s; }
@@ -223,7 +310,8 @@
     }
     .card-meta { font-size: 0.74rem; color: var(--text-muted); margin-top: auto; line-height: 1.4; }
 
-    .file-grid.list-view .file-card { flex-direction: row; text-align: left; padding: 10px 14px; gap: 12px; align-items: center; }
+    .file-grid.list-view .file-card { flex-direction: row; text-align: left; padding: 10px 14px 10px 48px; gap: 12px; align-items: center; }
+    .file-grid.list-view .card-select-wrap { top: 50%; left: 10px; transform: translateY(-50%); }
     .file-grid.list-view .card-thumb-box { width: 50px; height: 50px; margin-bottom: 0; flex-shrink: 0; }
     .file-grid.list-view .card-name { -webkit-line-clamp: 1; margin-bottom: 2px; padding-right: 28px; }
     .file-grid.list-view .card-menu { top: 50%; right: 10px; transform: translateY(-50%); }
@@ -245,9 +333,6 @@
     .toast-status { position: fixed; bottom: 16px; left: 16px; right: auto; max-width: calc(100vw - 32px); background: #0f172a; color: #fff; padding: 10px 16px; border-radius: 12px; display: flex; align-items: center; gap: 10px; z-index: 12000; transform: translateY(140px); opacity: 0; transition: all 0.3s; font-size: 0.86rem; }
     .toast-status.show { transform: translateY(0); opacity: 1; }
 
-    /* =============================================================
-       MOBILE RESPONSIVE DESIGN (សម្រាប់ទូរស័ព្ទដៃ)
-       ============================================================= */
     @media (max-width: 768px) {
       .sidebar { position: fixed; top: 0; bottom: 0; left: 0; width: 275px; max-width: 82vw; transform: translateX(-105%); box-shadow: 6px 0 25px rgba(0,0,0,0.35); }
       .sidebar.open { transform: translateX(0); }
@@ -255,7 +340,6 @@
       .btn-mobile-menu { display: inline-flex; }
       .btn-mobile-search { display: inline-flex; }
 
-      /* លាក់ប្រអប់ Search ធម្មតាលើទូរស័ព្ទ ហើយបង្ហាញពេញទទឹងពេលចុចលើ Icon Search */
       .search-bar {
         display: none;
       }
@@ -283,6 +367,7 @@
       .view-btn { min-width: 38px; height: 38px; padding: 0 8px; }
       .action-bar { padding: 10px 12px 6px; gap: 6px; }
       .btn-action { padding: 7px 11px; font-size: 0.8rem; }
+      .bulk-selection-bar { margin: 0 12px 8px; padding: 8px 10px; }
       .breadcrumb-bar { padding: 0 12px 8px; font-size: 0.84rem; }
       .content-scroll { padding: 0 12px 80px; }
       .file-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
@@ -290,7 +375,7 @@
       .custom-menu { width: 175px; }
     }
   </style>
-  <script type="module" crossorigin src="./assets/index-B_ogMtnT.js"></script>
+  <script type="module" crossorigin src="./assets/index-B7XPWVcE.js"></script>
 </head>
 <body data-theme="basic">
 
@@ -357,7 +442,6 @@
         <i class="bi bi-list"></i>
       </button>
 
-      <!-- ប្រអប់ Search (លើកុំព្យូទ័របង្ហាញធម្មតា ឯលើទូរស័ព្ទនឹងលោតពេញទទឹងពេលចុចប៊ូតុង Search) -->
       <div class="search-bar" id="searchBarBox" onclick="event.stopPropagation()">
         <i class="bi bi-search text-muted"></i>
         <input type="text" id="searchInput" placeholder="ស្វែងរកឯកសារ ឬ Folder..." oninput="applySearchFilter()">
@@ -367,7 +451,6 @@
       </div>
 
       <div class="d-flex gap-1 gap-md-2 align-items-center ms-auto">
-        <!-- ប៊ូតុង Icon Search សម្រាប់ទូរស័ព្ទ -->
         <button type="button" class="view-btn btn-mobile-search" onclick="openMobileSearch(event)" title="ស្វែងរក">
           <i class="bi bi-search"></i>
         </button>
@@ -412,6 +495,29 @@
     </header>
 
     <div class="action-bar" id="actionBarArea"></div>
+
+    <!-- របារបញ្ជាពេលជ្រើសរើសឯកសារច្រើន (Bulk Selection Bar) -->
+    <div class="bulk-selection-bar" id="bulkSelectionBar">
+      <div class="d-flex align-items-center gap-2">
+        <i class="bi bi-check2-square fs-5"></i>
+        <span class="fw-bold small" id="bulkSelectedCountLabel">បានជ្រើសរើស 0 ឯកសារ</span>
+      </div>
+      <div class="d-flex align-items-center gap-2 flex-wrap">
+        <button type="button" class="bulk-btn" onclick="selectAllVisibleFiles()">
+          <i class="bi bi-check-all"></i> ជ្រើសរើសទាំងអស់
+        </button>
+        <button type="button" class="bulk-btn btn-warn" id="btnBulkMove" onclick="openBulkMoveModal()">
+          <i class="bi bi-folder-symlink-fill"></i> ផ្លាស់ទីចូល Folder
+        </button>
+        <button type="button" class="bulk-btn btn-danger-soft" id="btnBulkTrashAction" onclick="handleBulkTrashAction()">
+          <i class="bi bi-trash"></i> លុប
+        </button>
+        <button type="button" class="bulk-btn" onclick="clearFileSelection(true)">
+          <i class="bi bi-x-lg"></i> បោះបង់
+        </button>
+      </div>
+    </div>
+
     <div class="breadcrumb-bar" id="breadcrumbArea"></div>
 
     <div class="content-scroll" onclick="closeAllMenus()">
@@ -492,11 +598,11 @@
   <div class="custom-modal-overlay" id="moveModal">
     <div class="custom-modal-box">
       <div class="cm-header">
-        <h6 class="m-0 fw-bold"><i class="bi bi-arrows-move text-primary me-2"></i>ផ្លាស់ទីទៅកាន់ Folder</h6>
+        <h6 class="m-0 fw-bold" id="moveModalTitle"><i class="bi bi-arrows-move text-primary me-2"></i>ផ្លាស់ទីទៅកាន់ Folder</h6>
         <button type="button" class="btn-close" onclick="closeModal('moveModal')"></button>
       </div>
       <div class="cm-body">
-        <label class="small fw-bold mb-2">ជ្រើសរើសទីតាំងគោលដៅ៖</label>
+        <label class="small fw-bold mb-2" id="moveModalDesc">ជ្រើសរើសទីតាំងគោលដៅ៖</label>
         <select class="cm-input mb-3" id="selMoveTarget"></select>
         <div class="text-end"><button type="button" class="btn btn-primary fw-bold px-4" onclick="confirmMoveItem()">ផ្លាស់ទីឥឡូវនេះ</button></div>
       </div>
