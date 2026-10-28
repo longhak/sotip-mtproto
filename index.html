@@ -128,6 +128,82 @@
     .view-btn:hover { border-color: var(--primary); }
     .view-btn.active { background-color: var(--primary); color: #fff; border-color: var(--primary); }
 
+    /* =============================================================
+       GOOGLE DRIVE STYLE TOP SELECTION BAR (លោតជំនួសលើ Topbar)
+       ============================================================= */
+    .top-selection-bar {
+      display: none;
+      position: absolute;
+      inset: 0;
+      background-color: var(--primary);
+      color: #ffffff;
+      padding: 0 20px;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 700;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+      animation: topBarSlide 0.16s ease-out;
+    }
+    .top-selection-bar.show {
+      display: flex;
+    }
+    @keyframes topBarSlide {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .tsb-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      font-size: 0.98rem;
+    }
+    .tsb-icon-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .tsb-icon-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+    .tsb-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tsb-action-btn {
+      height: 36px;
+      padding: 0 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .tsb-action-btn:hover {
+      background: rgba(255, 255, 255, 0.26);
+    }
+    .tsb-action-btn.tsb-danger:hover {
+      background: #ef4444;
+      border-color: #ef4444;
+    }
+
     .cloud-sync-pill {
       display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px;
       border-radius: 20px; font-size: 0.78rem; font-weight: 600;
@@ -145,57 +221,7 @@
     .action-bar { padding: 12px 20px 8px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .btn-action { position: relative; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 14px; border-radius: 10px; font-weight: 600; font-size: 0.86rem; cursor: pointer; background-color: var(--bg-panel); border: 1px solid var(--border); color: var(--text-main); box-shadow: var(--card-shadow); line-height: 1.6; white-space: nowrap; }
     .btn-action:hover { border-color: var(--primary); }
-    .btn-action.active-mode { background-color: var(--primary); color: #fff; border-color: var(--primary); }
     .btn-action input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
-
-    /* របារបញ្ជាពេលជ្រើសរើសឯកសារច្រើន (Bulk Selection Bar) */
-    .bulk-selection-bar {
-      display: none;
-      margin: 0 20px 10px;
-      padding: 8px 14px;
-      border-radius: 12px;
-      background: var(--primary);
-      color: #fff;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-      box-shadow: 0 6px 18px rgba(30, 86, 160, 0.25);
-      animation: menuFade 0.18s ease;
-    }
-    .bulk-selection-bar.show {
-      display: flex;
-    }
-    .bulk-btn {
-      border: 1px solid rgba(255,255,255,0.3);
-      background: rgba(255,255,255,0.15);
-      color: #fff;
-      padding: 5px 12px;
-      border-radius: 8px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      transition: all 0.15s;
-      white-space: nowrap;
-    }
-    .bulk-btn:hover {
-      background: rgba(255,255,255,0.28);
-    }
-    .bulk-btn.btn-warn {
-      background: #eab308;
-      color: #0f172a;
-      border-color: #eab308;
-    }
-    .bulk-btn.btn-warn:hover {
-      background: #facc15;
-    }
-    .bulk-btn.btn-danger-soft {
-      background: rgba(239, 68, 68, 0.85);
-      border-color: rgba(255,255,255,0.25);
-    }
 
     .breadcrumb-bar { padding: 0 20px 10px; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; font-size: 0.9rem; }
     .bc-item { cursor: pointer; color: var(--text-muted); font-weight: 600; padding: 2px 8px; border-radius: 8px; transition: all 0.15s; }
@@ -209,48 +235,51 @@
     
     .file-card { 
       background-color: var(--bg-panel); border: 1px solid var(--border); border-radius: 16px; 
-      padding: 10px; text-align: center; position: relative; transition: all 0.2s; 
+      padding: 10px; text-align: center; position: relative; transition: all 0.18s; 
       box-shadow: var(--card-shadow); display: flex; flex-direction: column; 
       overflow: visible !important; z-index: 1; min-width: 0;
+      user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
     }
     .file-card:hover { border-color: var(--primary); transform: translateY(-2px); z-index: 10; }
     .file-card.has-menu-open { z-index: 9999 !important; border-color: var(--primary); }
+    
+    /* រចនាបថពេលកាតត្រូវបាន Hold ជ្រើសរើស (គ្មានប្រអប់ធីកពេលធម្មតាទេ) */
     .file-card.selected {
       border: 2px solid var(--primary) !important;
-      background-color: rgba(59, 130, 246, 0.08);
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.16);
+      background-color: rgba(30, 86, 160, 0.1);
+      box-shadow: 0 0 0 3px rgba(30, 86, 160, 0.18);
+      transform: scale(0.98);
+    }
+    body[data-theme="modern"] .file-card.selected,
+    body[data-theme="linear"] .file-card.selected {
+      background-color: rgba(59, 130, 246, 0.2);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
     }
 
-    /* ប៊ូតុងធីកជ្រើសរើសឯកសារ (Multi-select Checkbox) */
-    .card-select-wrap {
+    /* សញ្ញាធីកតូចលោតចេញតែពេលកាតនោះត្រូវបានជ្រើសរើសប៉ុណ្ណោះ */
+    .selected-badge {
+      display: none;
       position: absolute;
       top: 8px;
       left: 8px;
-      z-index: 50;
-    }
-    .btn-select-check {
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
-      border: 1.5px solid rgba(100, 116, 139, 0.35);
-      background: rgba(255, 255, 255, 0.92);
-      color: transparent;
-      display: flex;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #ffffff;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      font-size: 1rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-      transition: all 0.15s;
+      font-size: 0.9rem;
+      z-index: 55;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
     }
-    .btn-select-check:hover {
-      border-color: var(--primary);
-      transform: scale(1.06);
+    .file-card.selected .selected-badge {
+      display: flex;
+      animation: popIn 0.15s ease-out;
     }
-    .file-card.selected .btn-select-check {
-      background: var(--primary);
-      border-color: var(--primary);
-      color: #ffffff;
+    @keyframes popIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
     
     .card-menu { position: absolute; top: 8px; right: 8px; z-index: 50; }
@@ -275,7 +304,7 @@
       margin-bottom: 8px; position: relative; overflow: hidden; border: 1px solid rgba(0,0,0,0.06);
       cursor: pointer; background-color: var(--hover-bg);
     }
-    .card-thumb-box img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transition: transform 0.3s ease; }
+    .card-thumb-box img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transition: transform 0.3s ease; pointer-events: none; }
     .file-card:hover .card-thumb-box img { transform: scale(1.04); }
 
     .file-icon-fallback { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; transition: transform 0.3s; }
@@ -310,8 +339,7 @@
     }
     .card-meta { font-size: 0.74rem; color: var(--text-muted); margin-top: auto; line-height: 1.4; }
 
-    .file-grid.list-view .file-card { flex-direction: row; text-align: left; padding: 10px 14px 10px 48px; gap: 12px; align-items: center; }
-    .file-grid.list-view .card-select-wrap { top: 50%; left: 10px; transform: translateY(-50%); }
+    .file-grid.list-view .file-card { flex-direction: row; text-align: left; padding: 10px 14px; gap: 12px; align-items: center; }
     .file-grid.list-view .card-thumb-box { width: 50px; height: 50px; margin-bottom: 0; flex-shrink: 0; }
     .file-grid.list-view .card-name { -webkit-line-clamp: 1; margin-bottom: 2px; padding-right: 28px; }
     .file-grid.list-view .card-menu { top: 50%; right: 10px; transform: translateY(-50%); }
@@ -363,11 +391,13 @@
       }
 
       .topbar { height: 60px; padding: 0 12px; gap: 8px; }
+      .top-selection-bar { padding: 0 10px; }
+      .tsb-left { gap: 6px; font-size: 0.88rem; }
+      .tsb-action-btn { padding: 0 10px; font-size: 0.78rem; height: 34px; }
       .view-btn span { display: none; }
       .view-btn { min-width: 38px; height: 38px; padding: 0 8px; }
       .action-bar { padding: 10px 12px 6px; gap: 6px; }
       .btn-action { padding: 7px 11px; font-size: 0.8rem; }
-      .bulk-selection-bar { margin: 0 12px 8px; padding: 8px 10px; }
       .breadcrumb-bar { padding: 0 12px 8px; font-size: 0.84rem; }
       .content-scroll { padding: 0 12px 80px; }
       .file-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
@@ -375,7 +405,7 @@
       .custom-menu { width: 175px; }
     }
   </style>
-  <script type="module" crossorigin src="./assets/index-B7XPWVcE.js"></script>
+  <script type="module" crossorigin src="./assets/index-B9bl0HNs.js"></script>
 </head>
 <body data-theme="basic">
 
@@ -472,6 +502,30 @@
         </button>
       </div>
 
+      <!-- របារបញ្ជាខាងលើបែប Google Drive ពេល Hold ជ្រើសរើស File ឬ Folder -->
+      <div class="top-selection-bar" id="topSelectionBar" onclick="event.stopPropagation()">
+        <div class="tsb-left">
+          <button type="button" class="tsb-icon-btn" onclick="clearSelection()" title="បោះបង់ការជ្រើសរើស">
+            <i class="bi bi-x-lg"></i>
+          </button>
+          <span id="topSelectedCountLabel">1 បានជ្រើសរើស</span>
+        </div>
+        <div class="tsb-actions">
+          <button type="button" class="tsb-icon-btn" onclick="selectAllVisibleItems()" title="ជ្រើសរើសទាំងអស់">
+            <i class="bi bi-check2-all"></i>
+          </button>
+          <button type="button" class="tsb-action-btn" id="btnTopMove" onclick="openBulkMoveModal()">
+            <i class="bi bi-folder-symlink"></i> <span>ផ្លាស់ទី</span>
+          </button>
+          <button type="button" class="tsb-action-btn" id="btnTopRestore" style="display:none;" onclick="handleBulkRestore()">
+            <i class="bi bi-arrow-counterclockwise"></i> <span>សង្គ្រោះវិញ</span>
+          </button>
+          <button type="button" class="tsb-action-btn tsb-danger" id="btnTopDelete" onclick="handleBulkDelete()">
+            <i class="bi bi-trash3"></i> <span id="lblTopDelete">លុប</span>
+          </button>
+        </div>
+      </div>
+
       <div class="typo-popover" id="typoPopover" onclick="event.stopPropagation()">
         <div class="fw-bold small mb-2"><i class="bi bi-sliders me-1 text-primary"></i> កំណត់អក្សរខ្មែរ & អង់គ្លេស</div>
         <div class="mb-3">
@@ -495,29 +549,6 @@
     </header>
 
     <div class="action-bar" id="actionBarArea"></div>
-
-    <!-- របារបញ្ជាពេលជ្រើសរើសឯកសារច្រើន (Bulk Selection Bar) -->
-    <div class="bulk-selection-bar" id="bulkSelectionBar">
-      <div class="d-flex align-items-center gap-2">
-        <i class="bi bi-check2-square fs-5"></i>
-        <span class="fw-bold small" id="bulkSelectedCountLabel">បានជ្រើសរើស 0 ឯកសារ</span>
-      </div>
-      <div class="d-flex align-items-center gap-2 flex-wrap">
-        <button type="button" class="bulk-btn" onclick="selectAllVisibleFiles()">
-          <i class="bi bi-check-all"></i> ជ្រើសរើសទាំងអស់
-        </button>
-        <button type="button" class="bulk-btn btn-warn" id="btnBulkMove" onclick="openBulkMoveModal()">
-          <i class="bi bi-folder-symlink-fill"></i> ផ្លាស់ទីចូល Folder
-        </button>
-        <button type="button" class="bulk-btn btn-danger-soft" id="btnBulkTrashAction" onclick="handleBulkTrashAction()">
-          <i class="bi bi-trash"></i> លុប
-        </button>
-        <button type="button" class="bulk-btn" onclick="clearFileSelection(true)">
-          <i class="bi bi-x-lg"></i> បោះបង់
-        </button>
-      </div>
-    </div>
-
     <div class="breadcrumb-bar" id="breadcrumbArea"></div>
 
     <div class="content-scroll" onclick="closeAllMenus()">
