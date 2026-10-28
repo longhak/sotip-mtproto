@@ -79,6 +79,52 @@
     }
     body { height: 100vh; height: 100dvh; display: flex; overflow: hidden; width: 100vw; }
 
+    /* =============================================================
+       DRAG AND DROP UPLOAD OVERLAY
+       ============================================================= */
+    .drag-drop-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.72);
+      backdrop-filter: blur(4px);
+      z-index: 15000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      pointer-events: none;
+    }
+    .drag-drop-overlay.active {
+      display: flex;
+      animation: fadeInDrop 0.16s ease-out;
+    }
+    @keyframes fadeInDrop {
+      from { opacity: 0; transform: scale(0.97); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .drag-drop-box {
+      width: 100%;
+      max-width: 560px;
+      background: var(--bg-panel);
+      color: var(--text-main);
+      border: 3px dashed var(--primary);
+      border-radius: 24px;
+      padding: 48px 28px;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+    }
+    .drag-drop-box i {
+      font-size: 4.5rem;
+      color: var(--primary);
+      display: block;
+      margin-bottom: 12px;
+      animation: floatIcon 1.5s infinite ease-in-out;
+    }
+    @keyframes floatIcon {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
     .sidebar-backdrop {
       display: none;
       position: fixed;
@@ -405,9 +451,18 @@
       .custom-menu { width: 175px; }
     }
   </style>
-  <script type="module" crossorigin src="./assets/index-BUZquat6.js"></script>
+  <script type="module" crossorigin src="./assets/index-Bbv0ez96.js"></script>
 </head>
 <body data-theme="basic">
+
+  <!-- ផ្ទាំងលោតទទួលឯកសារពេលអូសទម្លាក់ (Drag and Drop Overlay) -->
+  <div class="drag-drop-overlay" id="dragDropOverlay">
+    <div class="drag-drop-box">
+      <i class="bi bi-cloud-arrow-up-fill"></i>
+      <h5 class="fw-bold mb-2">ទម្លាក់ឯកសារទីនេះដើម្បី Upload</h5>
+      <p class="text-muted small m-0" id="dragDropTargetText">ឯកសារនឹងត្រូវបញ្ជូនចូលទៅក្នុង Folder បច្ចុប្បន្ន</p>
+    </div>
+  </div>
 
   <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeMobileSidebar()"></div>
 
@@ -440,12 +495,6 @@
         <i class="bi bi-trash3-fill text-danger"></i> ធុងសម្រាម (Trash)
       </li>
       <div class="nav-divider"></div>
-      <li class="nav-item" onclick="closeMobileSidebar(); syncSavedMessages();">
-        <i class="bi bi-arrow-repeat text-success"></i> Sync ពី Saved Messages
-      </li>
-      <li class="nav-item" onclick="closeMobileSidebar(); forceUploadVFSNow();">
-        <i class="bi bi-cloud-arrow-up-fill text-info"></i> បង្ហោះ JSON Sync ឥឡូវនេះ
-      </li>
       <li class="nav-item" id="navLoginBtn" onclick="closeMobileSidebar(); openModal('authModal');">
         <i class="bi bi-key-fill text-warning"></i> ភ្ជាប់គណនី (Login)
       </li>
